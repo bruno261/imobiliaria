@@ -1,0 +1,1 @@
+Install Getters and Setters no PHP, plug-in no VSCODE.
