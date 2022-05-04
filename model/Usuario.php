@@ -1,80 +1,116 @@
 <?php
+    require_once 'Banco.php';
+    require_once '../Conexao.php';
 
-require_once 'Banco.php';
-require_once '../Conexao.php';
-    
     class Usuario extends Banco
     {
+
         private $id;
         private $login;
         private $senha;
         private $permissao;
-        
-        // Usamos get para obter informações. Esse tipo de método sempre retorna um valor.
+
         public function getId()
         {
             return $this->id;
+        }
+
+        public function setId($id)
+        {
+            $this->id = $id;
         }
 
         public function getLogin()
         {
             return $this->login;
         }
-        
+
+        public function setLogin($login)
+        {
+            $this->login = $login;
+
+        }
         public function getSenha()
         {
             return $this->senha;
+        }
+
+        public function setSenha($senha)
+        {
+            $this->senha = $senha;
         }
 
         public function getPermissao()
         {
             return $this->permissao;
         }
-        // Usamos set para definir valores. Esse tipo de método geralmente não retorna valores.
-        public function setId($id)
-        {
-            $this->id = $id;
-        }
-
-        public function setLogin($login)
-        {
-            $this->login = $login;
-        }
-        
-        public function setSenha($senha)
-        {
-            $this->$senha = $senha;
-        }
 
         public function setPermissao($permissao)
         {
             $this->permissao = $permissao;
         }
-        
-        // Funções da super classe.
+
         public function save()
         {
-            // Implementar depois.
+
+            $result = false;
+            $conexao = new Conexao();
+
+            $sql = "insert into usuario values (null, :login, :senha, :permissao)";
+            if($conn = $conexao->getConection())
+            {
+                $stmt = $conn->prepare($sql);
+                if($stmt->execute(array(':login'=> $this->login, 
+                                        ':senha'=> $this->senha, 
+                                        ':permissao'=> $this->permissao 
+                                        )))
+                                        {
+                                            $result = $stmt->rowCount();
+                                        }
+            }
+            return $result;
         }
 
         public function remove($id)
         {
-            // Implementar depois.
+
         }
 
         public function find($id)
         {
-            // Implementar depois.
+
         }
 
         public function count()
         {
-            // Implementar depois.
+
         }
 
         public function listAll()
         {
-            // Implementar depois.
+            // Cria um objeto do tipo conexão.
+            $conexao = new Conexao();
+            // Cria a conexao com o banco de dados.
+            $conn = $conexao->getConection();
+            // Cria query de seleção.
+            $query = "SELECT * FROM usuario";
+            // Prepara a query para execução.
+            $stmt = $conn->prepare($query);
+            // Cria um array para receber o resultado da seleção.
+            $result = array();
+            // Executa a query.
+            if ($stmt->execute()) 
+            {
+                // O resultado da busca será retornado como um objeto da classe.
+                while ($rs = $stmt->fetchObject(Usuario::class))
+                    // Armazena esse objeto em uma posição do vetor.
+                    $result[] = $rs;
+                
+            }
+            else
+                $result = false;
+            
+            return $result;
         }
     }
 ?>

@@ -1,14 +1,17 @@
 <?php
-    abstract class Banco
-    {
-        abstract public function save();
 
-        abstract public function remove($id);
+abstract class Banco{
 
-        abstract public function find($id);
+    abstract public function save();
 
-        abstract public function count();
+    abstract public function remove($id);
 
-        abstract public function listAll();
-    }
+    abstract public function find($id);
+
+    abstract public function count();
+    
+    abstract public function listAll();
+
+}
+
 ?>
