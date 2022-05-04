@@ -105,7 +105,6 @@
                 while ($rs = $stmt->fetchObject(Usuario::class))
                     // Armazena esse objeto em uma posição do vetor.
                     $result[] = $rs;
-                
             }
             else
                 $result = false;
