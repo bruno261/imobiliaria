@@ -5,7 +5,6 @@
 
     class Imovel extends Banco
     {
-
         private $id;
         private $descricao;
         private $foto;
@@ -22,12 +21,10 @@
             $this->id = $id;
         }
 
-
         public function getDescricao()
         {
             return $this->descricao;
         }
-
 
         public function setDescricao($descricao)
         {
@@ -64,6 +61,9 @@
             $this->tipo = $tipo;
         }
 
+        /**
+        * Cadastra um imóvel na bases de dados.
+        */ 
         public function save(){
             $result = false;
             $conexao = new Conexao();
@@ -84,6 +84,10 @@
             return $result;
         }
 
+        /**
+        * Remove um imóvel na bases de dados baseado no Id.
+        * @id  Código de identificação do imóvel.
+        */ 
         public function remove($id){
 
         }
@@ -96,6 +100,9 @@
 
         }
 
+        /**
+        * Lista todos os imóveis cadastrados na bases de dados.
+        */ 
         public function listAll()
         {
             // Cria um objeto do tipo conexão.
