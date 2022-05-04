@@ -42,13 +42,12 @@ require_once '../head.php';
     </div>
 
 <?php
-
-    if(isset($_POST['btnCadastrar'])){
+    if(isset($_POST['btnCadastrar']))
+    {
 
         require_once '../controller/UsuarioController.php';
         call_user_func(array('UsuarioController','salvar'));
     }
-
-
+    
     require_once '../foot.php';
 ?>

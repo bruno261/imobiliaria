@@ -1,5 +1,5 @@
 <?php
-require_once '../head.php';
+    require_once '../head.php';
 ?>
 <div class="container">
 
@@ -19,9 +19,9 @@ require_once '../head.php';
             <?php
                 // Importa o Usuário Controller.
                 require_once '../controller/ImovelController.php';
-                //Chama uma função PHP que permite informar a classe e o Método que será acionado
+                //Chama uma função PHP que permite informar a classe e o Método que será acionado.
                 $imoveis = call_user_func(array('ImovelController','listar'));
-                //Verifica se houve algum retorno
+                // Verifica se houve algum retorno.
                 if (isset($imoveis) && !empty($imoveis)) 
                 {
                     foreach ($imoveis as $imovel) 
@@ -53,6 +53,7 @@ require_once '../head.php';
         </tbody>
     </table>
 </div>
+
 <?php
     require_once '../foot.php';
 ?>

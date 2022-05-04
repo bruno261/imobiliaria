@@ -1,16 +1,16 @@
 <?php
-require_once '../head.php';
+    require_once '../head.php';
 ?>
 <div class="container">
         <form name="cadUsuario" id="cadUsuario" action="" method="post">
             <div class="card" style="top:40px">
                 <div class="card-header">
-                    <span class="card-title">Imovéis</span>
+                    <span class="card-title">Imóveis</span>
                 </div>
                 <div class="card-body">
                 </div>
                 <div class="form-group form-row">
-                    <label class="col-sm-2 col-form-label text-right">Descricao:</label>
+                    <label class="col-sm-2 col-form-label text-right">Descrição:</label>
                     <input type="text" class="form-control col-sm-8" name="descricao" id="descricao" 
                     value="" />
                 </div>
@@ -28,7 +28,7 @@ require_once '../head.php';
                     <label class="col-sm-2 col-form-label text-right">Tipo:</label>
                     <select name="tipo" id="tipo" class="form-control col-sm-8">
                         <option value="0">**SELECIONE**</option>
-                        <option value="C">Casa Terrea</option>
+                        <option value="C">Casa Térrea</option>
                         <option value="S">Sobrado</option>
                         <option value="T">Terreno</option>
                         <option value="H">Chacara</option>
@@ -44,13 +44,12 @@ require_once '../head.php';
     </div>
 
 <?php
-
-    if(isset($_POST['btnSalvar'])){
-        echo 'yep!';
+    if(isset($_POST['btnSalvar']))
+    {
+        echo 'Salvo!';
         require_once '../controller/ImovelController.php';
         call_user_func(array('ImovelController','salvar'));
     }
-
 
     require_once '../foot.php';
 ?>

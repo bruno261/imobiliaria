@@ -47,6 +47,7 @@
         </tbody>
     </table>
 </div>
+
 <?php
     require_once '../foot.php';
 ?>
