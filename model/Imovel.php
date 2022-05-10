@@ -142,7 +142,7 @@
         }
 
         /**
-        * Lista todos os imóveis cadastrados na bases de dados.
+        * Lista todos os imóveis cadastrados na base de dados.
         */ 
         public function listAll()
         {
