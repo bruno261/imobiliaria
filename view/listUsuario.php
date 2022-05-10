@@ -3,9 +3,9 @@
 ?>
 <div class="container">
 
-<h1>Usuários</h1>
-<hr>
-<table class="table table-bordered table-striped" style="top:40px;">
+    <h1>Usuários</h1>
+    <hr>
+    <table class="table table-bordered table-striped" style="top:40px;">
         <thead>
             <tr>
                 <th>Login</th>
@@ -23,25 +23,25 @@
                 if (isset($usuarios) && !empty($usuarios)) {
                     foreach ($usuarios as $usuario) {
             ?>
-                        <tr>
-                            <!-- Como o retorno é um objeto, devemos chamar os get para mostrar o resultado -->
-                            <td><?php echo $usuario->getLogin(); ?></td>
-                            <td><?php echo ($usuario->getPermissao() == 'C')?'Comum':'Administrador';?></td>
-                            <td>
-                                <a href="" class="btn btn-primary btn-sm">Editar</a>
-                                <a href="" class="btn btn-danger btn-sm">Excluir</a>
-                            </td>
-                        </tr>
-                        <?php
+            <tr>
+                <!-- Como o retorno é um objeto, devemos chamar os get para mostrar o resultado -->
+                <td><?php echo $usuario->getLogin(); ?></td>
+                <td><?php echo ($usuario->getPermissao() == 'C')?'Comum':'Administrador';?></td>
+                <td>
+                    <a href="" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+            <?php
                 }
             } 
             else 
             {
                         ?>
-                <tr>
-                    <td colspan="3">Nenhum registro encontrado</td>
-                </tr>
-                <?php
+            <tr>
+                <td colspan="3">Nenhum registro encontrado</td>
+            </tr>
+            <?php
             }
                 ?>
         </tbody>
@@ -51,4 +51,3 @@
 <?php
     require_once '../foot.php';
 ?>
-
