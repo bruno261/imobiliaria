@@ -75,14 +75,8 @@
             if($conn = $conexao->getConection())
             {
                 $stmt = $conn->prepare($sql);
-                if($stmt->execute(array(':descricao'=> $this->descricao, 
-                                        ':foto'=> $this->foto, 
-                                        ':valor'=> $this->valor,
-                                        ':tipo'=> $this->tipo
-                                        )))
-                                        {
-                                            $result = $stmt->rowCount();
-                                        }
+                if($stmt->execute(array(':descricao'=> $this->descricao, ':foto'=> $this->foto, ':valor'=> $this->valor, ':tipo'=> $this->tipo)))
+                    $result = $stmt->rowCount();
             }
             return $result;
         }
@@ -137,8 +131,12 @@
             return $result;
         }
 
-        public function count(){
-
+        /**
+        * Quantifica os imóveis cadastrados na base de dados.
+        */ 
+        public function count()
+        {
+            // Falta implementar.
         }
 
         /**

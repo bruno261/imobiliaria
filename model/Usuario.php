@@ -110,7 +110,7 @@
         */ 
         public function count()
         {
-
+            // Falta implementar.
         }
 
         /**
