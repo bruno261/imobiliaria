@@ -28,3 +28,23 @@ public function setSenha($senha)
         }
         return $result;
     }
+
+
+    public function remove($id){
+        $result = false;
+        //cria um objeto do tipo conexao
+        $conexao = new Conexao();
+        //cria a conexao com o banco de dados
+        $conn = $conexao->getConection();
+        //cria query de remocao
+        $query = "DELETE FROM imovel WHERE id = :id";
+        //prepara a query para execuxao
+        $stmt =  $conn->prepare($query);
+        //executa a query
+        if($stmt->execute(array(':id'=> $id))){
+            $result = true;
+        }
+        return $result;
+    }
+
+   
