@@ -1,8 +1,7 @@
 <?php
     require_once '../model/Usuario.php';
-
     /**
-    * Controller que provê endpoints relacionados a entidade de usuário.
+    * Controller que provê endpoints relacionados a entidade usuário.
     */ 
     class UsuarioController
     {
@@ -27,5 +26,29 @@
             $usuario = new Usuario();
             return $usuario->listAll();
         }
+
+        /**
+        * Edita um usuário cadastrado com base em seu código de identificação.
+        * @id  Código de identificação do usuário.
+        */
+        public static function editar($id)
+        {
+            
+            $usuario = new Usuario;
+            $usuario = $usuario->find($id);
+
+            return $usuario;
+        }
+
+        /**
+        * Exclui um usuário cadastrado com base em seu código de identificação.
+        * @id  Código de identificação do usuário.
+        */
+        public static function excluir($id)
+        {
+            $usuario = new Usuario();
+            $usuario = $usuario->remove($id);
+        }
     }
 ?>
+
