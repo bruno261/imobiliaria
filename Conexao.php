@@ -1,4 +1,7 @@
 <?php
+    /**
+    * Classe responsável com a conexão com o banco de dados.
+    */ 
     class Conexao
     {
         private $servername = 'localhost:3306';
@@ -7,6 +10,9 @@
         private $database = 'imobiliaria';
         private $conection;
 
+        /**
+        * Realiza a conexão com a base de dados.
+        */ 
         public function getConection()
         {
             if(is_null($this->conection))
