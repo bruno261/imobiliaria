@@ -2,9 +2,11 @@
     require_once 'Banco.php';
     require_once '../Conexao.php';
 
+    /**
+    * Objeto de valor que representa um usuário.
+    */ 
     class Usuario extends Banco
     {
-
         private $id;
         private $login;
         private $senha;
@@ -50,6 +52,9 @@
             $this->permissao = $permissao;
         }
 
+        /**
+        * Cadastra os usuários na base de dados.
+        */ 
         public function save()
         {
 
@@ -71,21 +76,33 @@
             return $result;
         }
 
+        /**
+        * Remove os usuários cadastrados na base de dados com base no código de identificação.
+        */ 
         public function remove($id)
         {
 
         }
 
+        /**
+        * Busca usuários cadastrados na base de dados com base no códido de identificação.
+        */ 
         public function find($id)
         {
 
         }
 
+        /**
+        * Quantifica todos os usuários cadastrados na base de dados.
+        */ 
         public function count()
         {
 
         }
 
+        /**
+        * Lista todos os usuários cadastrados na base de dados.
+        */ 
         public function listAll()
         {
             // Cria um objeto do tipo conexão.
