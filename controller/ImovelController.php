@@ -1,8 +1,7 @@
 <?php
     require_once '../model/Imovel.php';
-
     /**
-    * Controller que provê endpoints relacionados a entidade de imóvel.
+    * Controller que provê endpoints relacionados a entidade imóvel.
     */ 
     class ImovelController
     {
@@ -28,5 +27,28 @@
             $imovel = new Imovel();
             return $imovel->listAll();
         }
+        
+        /**
+        * Edita um imóvel cadastrado com base em seu código de identificação.
+        * @id  Código de identificação do imóvel.
+        */
+        public static function editar($id)
+        {
+            $imovel = new Imovel;
+            $imovel = $imovel->find($id);
+
+            return $imovel;
+        }
+
+        /**
+        * Exclui um imóvel cadastrado com base em seu código de identificação.
+        * @id  Código de identificação do imóvel.
+        */
+        public static function excluir($id)
+        {
+            $imovel = new Imovel;
+            $imovel = $imovel->remove($id);
+        }
     }
 ?>
+
