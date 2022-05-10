@@ -1,8 +1,10 @@
 <?php
-
     require_once 'Banco.php';
     require_once '../Conexao.php';
 
+    /**
+    * Objeto de valor que representa um imóvel.
+    */ 
     class Imovel extends Banco
     {
         private $id;
@@ -62,9 +64,10 @@
         }
 
         /**
-        * Cadastra um imóvel na bases de dados.
+        * Cadastra um imóvel na base de dados.
         */ 
-        public function save(){
+        public function save()
+        {
             $result = false;
             $conexao = new Conexao();
 
@@ -85,19 +88,53 @@
         }
 
         /**
-        * Remove um imóvel na bases de dados baseado no Id.
+        * Remove um imóvel na base de dados baseado no Id.
         * @id  Código de identificação do imóvel.
         */ 
-        public function remove($id){
-
+        public function remove($id)
+        {
+            // Objeto responsável pela conexão.
+            $conexao = new Conexao();
+            // Cria a conexão com o banco de dados.
+            $conn = $conexao->getConection();
+            // Cria query de busca com base no código de identificação.. 
+            $query = "SELECT * FROM imovel WHERE id = :id";
+            // Prepara a query para execução.
+            $stmt = $conn->prepare($query);
+            // Executa a query.
+            if($stmt->execute(array(':id'=>$id)))
+            {
+                // Verifica se houve algum registro encontrado.
+                if($stmt->rowCount() > 0)
+                    // O resultado da busca será retornado como um objeto da classe.
+                    $result = $stmt->fetchObject(Imovel::class);
+                else
+                    $result = false;
+                
+            }
+            return $result;
         }
 
         /**
-        * Busca um imóvel na bases de dados baseado no Id.
+        * Busca um imóvel na base de dados baseado no Id.
         * @id  Código de identificação do imóvel.
         */ 
-        public function find($id){
-
+        public function find($id)
+        {
+            $conexao = new Conexao();
+            $conn = $conexao->getConection();
+            $query = "SELECT * FROM imovel";
+            $stmt = $conn->prepare($query);
+            $result = array();
+            if($stmt->execute())
+            {
+                while($rs = $stmt->fetchObject(Imovel::class))
+                    $result[] = $rs;
+            }
+            else
+                $result = false;
+            
+            return $result;
         }
 
         public function count(){
