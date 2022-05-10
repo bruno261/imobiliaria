@@ -92,6 +92,10 @@
 
         }
 
+        /**
+        * Busca um imóvel na bases de dados baseado no Id.
+        * @id  Código de identificação do imóvel.
+        */ 
         public function find($id){
 
         }
