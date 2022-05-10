@@ -1,8 +1,14 @@
 <?php
     require_once '../model/Usuario.php';
 
+    /**
+    * Controller que provê endpoints relacionados a entidade de usuário.
+    */ 
     class UsuarioController
     {
+        /**
+        * Persiste um novo usuário no repositório.
+        */ 
         public static function salvar()
         {
             $usuario = new Usuario();
@@ -13,6 +19,9 @@
             $usuario->save();
         }
 
+        /**
+        * Lista todos os usuários cadastrados no repositório.
+        */ 
         public static function listar()
         {
             $usuario = new Usuario();

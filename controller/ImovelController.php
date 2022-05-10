@@ -6,6 +6,9 @@
     */ 
     class ImovelController
     {
+        /**
+        * Persiste um novo imóvel no repositório.
+        */ 
         public static function salvar()
         {
             $imovel = new Imovel();
@@ -17,6 +20,9 @@
             $imovel->save();
         }
 
+        /**
+        * Lista todos os imóveis cadastrados no repositório.
+        */ 
         public static function listar()
         {
             $imovel = new Imovel();
