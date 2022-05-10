@@ -57,7 +57,6 @@
         */ 
         public function save()
         {
-
             $result = false;
             $conexao = new Conexao();
 
@@ -65,13 +64,8 @@
             if($conn = $conexao->getConection())
             {
                 $stmt = $conn->prepare($sql);
-                if($stmt->execute(array(':login'=> $this->login, 
-                                        ':senha'=> $this->senha, 
-                                        ':permissao'=> $this->permissao 
-                                        )))
-                                        {
-                                            $result = $stmt->rowCount();
-                                        }
+                if($stmt->execute(array(':login'=> $this->login, ':senha'=> $this->senha, ':permissao'=> $this->permissao)))
+                    $result = $stmt->rowCount();
             }
             return $result;
         }
@@ -81,7 +75,15 @@
         */ 
         public function remove($id)
         {
-
+            $result = false;
+            $conexao = new Conexao();
+            $conn = $conexao->getConection();
+            $query = "DELETE FROM usuario WHERE id = :id";
+            $stmt =  $conn->prepare($query);
+            if($stmt->execute(array(':id'=> $id)))
+                $result = true;
+            
+            return $result;
         }
 
         /**
@@ -89,11 +91,22 @@
         */ 
         public function find($id)
         {
-
+            $conexao = new Conexao();
+            $conn = $conexao->getConection();
+            $query = "SELECT * FROM usuario WHERE id = :id";
+            $stmt = $conn->prepare($query);
+            if($stmt->execute(array(':id'=>$id)))
+            {
+                if($stmt->rowCount() > 0)
+                    $result = $stmt->fetchObject(Usuario::class);
+                else
+                $result = false;
+            }
+            return $result;
         }
 
         /**
-        * Quantifica todos os usuários cadastrados na base de dados.
+        * Quantifica os usuários cadastrados na base de dados.
         */ 
         public function count()
         {
