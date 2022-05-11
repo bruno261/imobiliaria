@@ -1,5 +1,5 @@
 <?php
-  require_once './Controller/UsuarioController.php';
+    require_once './Controller/UsuarioController.php';
 ?>
 
 <!doctype html>
@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="view/images/icons/favicon.ico" />
+    <link rel="icon" type="image/png" href="view/images/icons/user.ico" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="view/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->

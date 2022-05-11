@@ -1,5 +1,5 @@
 <?php
-    require_once '../model/Imovel.php';
+    require_once 'model/Imovel.php';
     /**
     * Controller que provê endpoints relacionados a entidade imóvel.
     */ 

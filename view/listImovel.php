@@ -1,9 +1,9 @@
 <?php
-    require_once '../head.php';
+    //require_once '../head.php';
 ?>
 <div class="container">
 
-    <h1>Lista de Imovéis</h1>
+    <h1>Lista de Imóveis</h1>
     <hr>
     <table class="table table-bordered table-striped" style="top:40px;">
         <thead>
@@ -55,5 +55,5 @@
 </div>
 
 <?php
-    require_once '../foot.php';
+   // require_once '../foot.php';
 ?>

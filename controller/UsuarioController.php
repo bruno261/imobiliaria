@@ -1,5 +1,5 @@
 <?php
-    require_once '../model/Usuario.php';
+    require_once 'model/Usuario.php';
     /**
     * Controller que provê endpoints relacionados a entidade usuário.
     */ 

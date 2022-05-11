@@ -1,5 +1,5 @@
 <?php
-    require_once '../head.php';
+    //require_once '../head.php';
 ?>
 <div class="container">
 
@@ -49,5 +49,5 @@
 </div>
 
 <?php
-    require_once '../foot.php';
+   // require_once '../foot.php';
 ?>

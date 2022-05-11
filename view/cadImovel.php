@@ -1,11 +1,11 @@
 <?php
-    require_once '../head.php';
+    //require_once '../head.php';
 ?>
 <div class="container">
     <form name="cadUsuario" id="cadUsuario" action="" method="post">
         <div class="card" style="top:40px">
             <div class="card-header">
-                <span class="card-title">Cadastro de Imóveis</span>
+                <span class="card-title">Cadastro de Imóveis.</span>
             </div>
             <div class="card-body">
             </div>
@@ -47,5 +47,5 @@
         call_user_func(array('ImovelController','salvar'));
     }
 
-    require_once '../foot.php';
+    //require_once '../foot.php';
 ?>
