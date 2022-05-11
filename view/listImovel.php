@@ -3,7 +3,7 @@
 ?>
 <div class="container">
 
-    <h1>Imovéis</h1>
+    <h1>Lista de Imovéis</h1>
     <hr>
     <table class="table table-bordered table-striped" style="top:40px;">
         <thead>

@@ -1,12 +1,12 @@
 <?php
 
-    require_once './Controller/UsuarioController.php';
+    require_once './Controller/ImovelController.php';
 
 ?>
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Cadastro de usuarios</title>
+    <title>Cadastro de Imoveis</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,19 +36,19 @@
         if(isset($_GET['action'])){
             if($_GET['action'] == 'editar'){
                 //chama uma função PHP que permite informar a classe e o método que será acionado 
-                $usuario = call_user_func(array('UsuarioController','editar'), $_GET['id']);
-                require_once 'view/cadUsuario.php';
+                $imovel = call_user_func(array('ImovelController','editar'), $_GET['id']);
+                require_once 'view/cadImovel.php';
             }
             if($_GET['action'] == 'listar'){
-                require_once 'view/listUsuario.php';
+                require_once 'view/listImovel.php';
             }
             if($_GET['action'] == 'excluir'){
                 //chama uma função PHP que permite informar a classe e o método que será acionado 
-                $usuario = call_user_func(array('UsuarioController','excluir'),$_GET['id']);
-                require_once 'view/listUsuario.php';
+                $imovel = call_user_func(array('ImovelController','excluir'),$_GET['id']);
+                require_once 'view/listImovel.php';
             }
         }else{
-            require_once 'view/CadUsuario.php';
+            require_once 'view/CadImovel.php';
         }
       
       ?>

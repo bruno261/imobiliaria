@@ -3,7 +3,7 @@
 ?>
 <div class="container">
 
-    <h1>Usuários</h1>
+    <h1>Lista de Usuários</h1>
     <hr>
     <table class="table table-bordered table-striped" style="top:40px;">
         <thead>

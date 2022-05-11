@@ -5,7 +5,7 @@
     <form name="cadUsuario" id="cadUsuario" action="" method="post">
         <div class="card" style="top:40px">
             <div class="card-header">
-                <span class="card-title">Imóveis</span>
+                <span class="card-title">Cadastro de Imóveis</span>
             </div>
             <div class="card-body">
             </div>

@@ -5,7 +5,7 @@ require_once '../head.php';
     <form name="cadUsuario" id="cadUsuario" action="" method="post">
         <div class="card" style="top:40px">
             <div class="card-header">
-                <span class="card-title">Usuários</span>
+                <span class="card-title">Cadastro de Usuários</span>
             </div>
             <div class="card-body">
             </div>
