@@ -64,19 +64,32 @@
         }
 
         /**
-        * Cadastra um imóvel na base de dados.
+        * Cadastra um imóvel na base de dados, caso não exista e edita se existir.
         */ 
         public function save()
         {
             $result = false;
-            $conexao = new Conexao();
 
-            $sql = "insert into imovel values (null, :descricao, :foto, :valor, :tipo)";
+            // Conexão com o banco de dados.
+            $conexao = new Conexao();
+           // Cria a conexão com o banco de dados.
             if($conn = $conexao->getConection())
             {
-                $stmt = $conn->prepare($sql);
-                if($stmt->execute(array(':descricao'=> $this->descricao, ':foto'=> $this->foto, ':valor'=> $this->valor, ':tipo'=> $this->tipo)))
-                    $result = $stmt->rowCount();
+                if($this->id > 0)
+                {
+                    $query = "UPDATE imovel SET descricao = :descricao, foto = :foto, valor = :valor, tipo = :tipo WHERE id = :id";
+                    $stmt = $conn->prepare($query);
+                    if($stmt->execute(array(':descricao' => $this->descricao, ':foto' => $this->foto, ':valor' => $this->valor, ':id' => $this->id)))
+                        $result = $stmt->rowCount();
+                    
+                }
+                else
+                {
+                    $query = "INSERT INTO imovel (id, descricao, foto, valor, tipo) values (null,:descricao,:foto,:valor, :tipo)";
+                    $stmt = $conn->prepare($query);
+                    if($stmt->execute(array(":descricao" => $this->descricao, ":foto" => $this->foto, ":valor" => $this->valor, ":tipo" => $this->tipo)))
+                        $result = $stmt->rowCount();
+                }
             }
             return $result;
         }
