@@ -53,19 +53,29 @@
         }
 
         /**
-        * Cadastra os usuários na base de dados.
+        * Cadastra os usuários na base de dados se não existir e edita se existir.
         */ 
         public function save()
         {
             $result = false;
-            $conexao = new Conexao();
 
-            $sql = "insert into usuario values (null, :login, :senha, :permissao)";
+            $conexao = new Conexao();
             if($conn = $conexao->getConection())
             {
-                $stmt = $conn->prepare($sql);
-                if($stmt->execute(array(':login'=> $this->login, ':senha'=> $this->senha, ':permissao'=> $this->permissao)))
-                    $result = $stmt->rowCount();
+                if($this->id > 0)
+                {
+                    $query = "UPDATE usuario SET login = :login, senha = :senha, permissao = :permissao WHERE id = :id";
+                    $stmt = $conn->prepare($query);
+                    if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao, ':id' => $this->id)))
+                        $result = $stmt->rowCount();
+                }
+                else
+                {
+                    $query = "INSERT INTO usuario (id, login , senha, permissao) values (null,:login,:senha,:permissao)";
+                    $stmt = $conn->prepare($query);
+                    if($stmt->execute(array(':login'=>$this->login, ':senha' =>$this->senha, ':permissao'=>$this->permissao)))
+                        $result = $stmt->rowCount();
+                }
             }
             return $result;
         }
