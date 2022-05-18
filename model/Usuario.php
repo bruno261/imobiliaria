@@ -98,7 +98,7 @@
             if($stmt->execute(array(':id'=> $id)))
                 $result = true;
             
-            return $result;
+                return $result;
         }
 
         /**
@@ -133,6 +133,8 @@
         */ 
         public function listAll()
         {
+            $result = false;
+
             // Cria um objeto do tipo conexão.
             $conexao = new Conexao();
             // Cria a conexao com o banco de dados.
@@ -151,9 +153,32 @@
                     // Armazena esse objeto em uma posição do vetor.
                     $result[] = $rs;
             }
-            else
-                $result = false;
-            
+            return $result;
+        }
+
+        /**
+        * Realização o loguin de usuários cadastrados na base de dados.
+        */ 
+        public function logar()
+        {
+            $result = false;
+
+            // Cria um objeto do tipo conexão.
+            $conexao = new Conexao();
+            // Cria a conexao com o banco de dados.
+            $conn = $conexao->getConection();
+            // Cria query de seleção.
+            $query = "SELECT * FROM usuario WHERE login = :login and senha = :senha";
+            // Prepara a query para execução.
+            $stmt = $conn->prepare($query);
+            // Cria um array para receber o resultado da seleção.
+            $result = array();
+            // Executa a query.
+            if ($stmt->execute()(array(':login'=> $this->login, ':senha'=> $this->senha))) 
+            {
+                if($stmt->rowCount() > 0)
+                    $result = true;
+            }
             return $result;
         }
     }
