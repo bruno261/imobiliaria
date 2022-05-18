@@ -50,6 +50,18 @@
             $usuario = new Usuario();
             $usuario = $usuario->remove($id);
         }
+
+        /**
+        * Logar com um usuário no sistema.
+        */
+        public static function logat()
+        {
+            $usuario = new Usuario();
+            $usuario->setLogin($_POST['login']);
+            $usuario->setSenha($_POST['senha']);
+
+            return $usuario->logar();
+        }
     }
 ?>
 
