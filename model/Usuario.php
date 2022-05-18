@@ -12,14 +12,10 @@
         private $senha;
         private $permissao;
 
+        // Usamos get para obter informações. Esse tipo de método sempre retorna um valor.
         public function getId()
         {
             return $this->id;
-        }
-
-        public function setId($id)
-        {
-            $this->id = $id;
         }
 
         public function getLogin()
@@ -27,19 +23,9 @@
             return $this->login;
         }
 
-        public function setLogin($login)
-        {
-            $this->login = $login;
-
-        }
         public function getSenha()
         {
             return $this->senha;
-        }
-
-        public function setSenha($senha)
-        {
-            $this->senha = $senha;
         }
 
         public function getPermissao()
@@ -47,9 +33,28 @@
             return $this->permissao;
         }
 
+        // Usamos set para definir valores. Esse tipo de método geralmente não retorna valores.
+        public function setId($id)
+        {
+            $this->id = $id;
+        }
+        
+        public function setLogin($login)
+        {
+            $this->login = $login;
+        }
+        
         public function setPermissao($permissao)
         {
             $this->permissao = $permissao;
+        }
+        
+        /**
+        * Definir valores da senhas criptografadas com SHA1.
+        */ 
+        public function setSenha($senha)
+        {
+            $this->senha = sha1($senha);
         }
 
         /**
@@ -101,6 +106,8 @@
         */ 
         public function find($id)
         {
+            $result = false;
+
             $conexao = new Conexao();
             $conn = $conexao->getConection();
             $query = "SELECT * FROM usuario WHERE id = :id";
@@ -109,8 +116,6 @@
             {
                 if($stmt->rowCount() > 0)
                     $result = $stmt->fetchObject(Usuario::class);
-                else
-                $result = false;
             }
             return $result;
         }
