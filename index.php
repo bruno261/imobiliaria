@@ -30,6 +30,15 @@
         else
             require_once 'view/cadUsuario.php';
     }
+    else
+    {
+        if(isset($_GET['logar']))
+            require_once 'view/login.php';
+        else
+            require_once 'principal.php';
+    }
+
+    require_once 'foot.php';
 ?>
 
 <!doctype html>
