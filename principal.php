@@ -1,14 +1,59 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Alugar</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Comprar</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link right" href="index.php?logar"><i class="fa fa-lock" aria-hidden="true"></i></a>
-        </li>
-    </ul>
-</nav>
-<br>
+<!-- Sub Header -->
+<div class="sub-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-sm-8">
+          <div class="left-content">
+            <p>Acompanhe-nos nas nossas <em>Redes Sociais</em> a todo momento</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-4">
+          <div class="right-icons">
+            <ul>
+              <li><a href="https://facebook.com/brunojean.randremitsaha" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <nav class="main-nav">
+                      <!-- ***** Logo Start ***** -->
+                      <a href="index.html" class="logo">
+                        <i class="fa fa-home"></i>
+                          Bruno Imobiliária
+                      </a>
+                      <!-- ***** Logo End ***** -->
+                      <!-- ***** Menu Start ***** -->
+                      <ul class="nav">
+                          <li class="scroll-to-section"><a href="#top" class="active">Início</a></li>
+                          <li><a href="meetings.html">Comprar</a></li>
+                          <li class="scroll-to-section"><a href="#apply">Alugar</a></li>
+                          <li class="has-sub">
+                              <a href="javascript:void(0)">Novos</a>
+                              <ul class="sub-menu">
+                                  <li><a href="meetings.html">Upcoming Meetings</a></li>
+                                  <li><a href="meeting-details.html">Meeting Details</a></li>
+                              </ul>
+                          </li>
+                          <li class="scroll-to-section"><a href="#courses">Sobre</a></li> 
+                          <li class="scroll-to-section"><a href="#contact">Fale Conosco Us</a></li> 
+                      </ul>        
+                      <a class='menu-trigger'>
+                          <span>Menu</span>
+                      </a>
+                      <!-- ***** Menu End ***** -->
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </header>
+  <!-- ***** Header Area End ***** -->

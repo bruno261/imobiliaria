@@ -69,30 +69,37 @@
         public function save()
         {
             $result = false;
-
-            // Conexão com o banco de dados.
+            //cria um objeto do tipo conexao
             $conexao = new Conexao();
-           // Cria a conexão com o banco de dados.
+            // Cria a conexão com o banco de dados
             if($conn = $conexao->getConection())
             {
                 if($this->id > 0)
                 {
-                    $query = "UPDATE imovel SET descricao = :descricao, foto = :foto, valor = :valor, tipo = :tipo WHERE id = :id";
+                    //cria query de update passando os atributos que serão atualizados
+                    $query = "UPDATE imovel SET descricao = :descricao, foto = :foto, valor = :valor, tipo = :tipo,fotoTipo = :fotoTipo, path = :path WHERE id = :id";
+                    //prepara a query para execução
                     $stmt = $conn->prepare($query);
-                    if($stmt->execute(array(':descricao' => $this->descricao, ':foto' => $this->foto, ':valor' => $this->valor, ':id' => $this->id)))
+                    //executa a query
+                    if($stmt->execute(array(':descricao' => $this->descricao, ':foto' => $this->foto, ':valor' => $this->valor, ':tipo' => $this->tipo, ':fototipo' => $this->fototipo, ':id' => $this->id, ':path' => $this->path))){
                         $result = $stmt->rowCount();
                     
+                    }
+                    else
+                    {
+                        //cria query de inserção passando os atributos que  serão armazenados
+                        $query = "INSERT INTO imovel (id, descricao, foto, valor, tipo, fotoTipo, path) values (null,:descricao,:foto,:valor, :tipo, :fotoTipo, :path)";
+                        //Prepara a query para execução
+                        $stmt = $conn->prepare($query);
+                        //executa a query
+                        if($stmt->execute(array(':descricao' => $this->descricao,':foto' => $this->foto, ':valor' => $this->valor, ':tipo' => $this->tipo, ':fotoTipo' => $this->fotoTipo, ':path'=> $this->path))) {
+                            $result = $stmt->rowCount();
+                        }
+                    }
                 }
-                else
-                {
-                    $query = "INSERT INTO imovel (id, descricao, foto, valor, tipo) values (null,:descricao,:foto,:valor, :tipo)";
-                    $stmt = $conn->prepare($query);
-                    if($stmt->execute(array(":descricao" => $this->descricao, ":foto" => $this->foto, ":valor" => $this->valor, ":tipo" => $this->tipo)))
-                        $result = $stmt->rowCount();
-                }
-            }
             return $result;
-        }
+            }
+            }
 
         /**
         * Remove um imóvel na base de dados baseado no Id.
@@ -145,39 +152,41 @@
         }
 
         /**
-        * Quantifica os imóveis cadastrados na base de dados.
+        * Quantifica os imóveis cadastrados na base de dados
         */ 
         public function count()
         {
-            // Falta implementar.
+            // Falta implementar
         }
 
         /**
-        * Lista todos os imóveis cadastrados na base de dados.
+        * Lista todos os imóveis cadastrados na base de dados
         */ 
         public function listAll()
         {
-            // Cria um objeto do tipo conexão.
+            // Cria um objeto do tipo conexão
             $conexao = new Conexao();
-            // Cria a conexão com o banco de dados.
+            // Cria a conexão com o banco de dados
             $conn = $conexao->getConection();
-            // Cria query de seleção.
+            // Cria query de seleção
             $query = "SELECT * FROM imovel";
-            // Prepara a query para execução.
+            // Prepara a query para execução
             $stmt = $conn->prepare($query);
-            // Cria um array para receber o resultado da seleção.
+            // Cria um array para receber o resultado da seleção
             $result = array();
-            // Executa a query.
+            // Executa a query
             if ($stmt->execute()) {
                 // O resultado da busca será retornado como um objeto da classe
                 while ($rs = $stmt->fetchObject(Imovel::class))
-                    // Armazena esse objeto em uma posição do vetor.
+                    // Armazena esse objeto em uma posição do vetor
                     $result[] = $rs;
             }
-            else
+        else{
                 $result = false;
+        }
             
             return $result;
         }
     }
+    
 ?>

@@ -17,10 +17,17 @@
         {
             return $this->id;
         }
+        public function setId($id)
+        {
+            $this->id = $id;
+        }
 
         public function getLogin()
         {
-            return $this->login;
+            return $this->Login;
+        }
+        public function setLogin($login){
+            $this->login = $login;
         }
 
         public function getSenha()
@@ -32,20 +39,8 @@
         {
             return $this->permissao;
         }
-
-        // Usamos set para definir valores. Esse tipo de método geralmente não retorna valores.
-        public function setId($id)
-        {
-            $this->id = $id;
-        }
         
-        public function setLogin($login)
-        {
-            $this->login = $login;
-        }
-        
-        public function setPermissao($permissao)
-        {
+        public function setPermissao($permissao){ 
             $this->permissao = $permissao;
         }
         
@@ -63,27 +58,70 @@
         public function save()
         {
             $result = false;
+        //cria um objeto do tipo conexão
+            $conexao = new Conexao(); 
+        //cria a conexão com o banco de dados
+        if($conn = $conexao->getConection())
+        { 
+            if($this->id > 0){
+            //cria query de update passando os atributos que serão atualizados
+            $query = "UPDATE usuario SET login = :login, senha = :senha, permissao = :permisao WHERE id = :id";
 
-            $conexao = new Conexao();
-            if($conn = $conexao->getConection())
+            //cria query de inserção passando os atributos que serão armazenados
+            $query = "insert into usuario (id, login, senha, permissao) values (null, :login, :senha, permissao)";
+        
+                //prepara a query para execução 
+                $stmt = $conn->prepare($query);
+                //execute a query
+                if ($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao, ':id'=> $this->id))){
+                    $result = $stmt->rowCount();
+                }
+            }
+            else
             {
-                if($this->id > 0)
-                {
-                    $query = "UPDATE usuario SET login = :login, senha = :senha, permissao = :permissao WHERE id = :id";
-                    $stmt = $conn->prepare($query);
-                    if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' => $this->permissao, ':id' => $this->id)))
-                        $result = $stmt->rowCount();
-                }
-                else
-                {
-                    $query = "INSERT INTO usuario (id, login , senha, permissao) values (null,:login,:senha,:permissao)";
-                    $stmt = $conn->prepare($query);
-                    if($stmt->execute(array(':login'=>$this->login, ':senha' =>$this->senha, ':permissao'=>$this->permissao)))
-                        $result = $stmt->rowCount();
-                }
+                //cria query de inserção passando os atributos que serão armazenados
+                $query = "INSERT INTO usuario (id, login , senha, permissao) values (null, :login, :senha, :permissao)";
+                //prepara a query para execução
+                $stmt = $conn->prepare($query);
+                //executa a query
+                if($stmt->execute(array(':login' => $this->login, ':senha' => $this->senha, ':permissao' =>$this-> permissao)))
+                    $result = $stmt->rowCount();
+            }
+        }
+        return $result;
+        }
+
+    
+        /**
+        * Busca usuários cadastrados na base de dados com base no códido de identificação.
+        */ 
+        public function find($id)
+        {
+            //cria um objeto do tipo conexão
+            $conexao = new Conexao();
+            //cria a conexão com o banco de dados 
+            $conn = $conexao->getConection();
+            //cria query de seleção
+            $query = "SELECT * FROM usuario WHERE id = :id";
+            //prepara a query para execução
+            $stmt = $conn->prepare($query);
+            //executa a query
+            if($stmt->execute(array(':id'=> $id)))
+            {
+                //verifica se houve algum registro encontrado
+                if ($stmt->rowCount() > 0) {
+                //o resultado da busca será retornado como um objeto de classe 
+                    $result = $stmt->fetchObject(Usuario::class);
+            
+            }else{
+                $result = false;
+               }
             }
             return $result;
         }
+
+            // hatreto aloha mila verifier ny ambany rehetra sao voadika indroa 
+
 
         /**
         * Remove os usuários cadastrados na base de dados com base no código de identificação.
@@ -91,33 +129,19 @@
         public function remove($id)
         {
             $result = false;
+            //cria um objeto do tipo conexao
             $conexao = new Conexao();
+            //cria a conexao com o banco de dados 
             $conn = $conexao->getConection();
+            //cria query de remoção
             $query = "DELETE FROM usuario WHERE id = :id";
+            //prepara a query para execução
             $stmt =  $conn->prepare($query);
-            if($stmt->execute(array(':id'=> $id)))
+            //executa a query
+            if($stmt->execute(array(':id'=> $id))){
                 $result = true;
-            
-                return $result;
-        }
-
-        /**
-        * Busca usuários cadastrados na base de dados com base no códido de identificação.
-        */ 
-        public function find($id)
-        {
-            $result = false;
-
-            $conexao = new Conexao();
-            $conn = $conexao->getConection();
-            $query = "SELECT * FROM usuario WHERE id = :id";
-            $stmt = $conn->prepare($query);
-            if($stmt->execute(array(':id'=>$id)))
-            {
-                if($stmt->rowCount() > 0)
-                    $result = $stmt->fetchObject(Usuario::class);
             }
-            return $result;
+                return $result;
         }
 
         /**
@@ -163,23 +187,28 @@
         {
             $result = false;
 
-            // Cria um objeto do tipo conexão.
+            // Cria um objeto do tipo conexão
             $conexao = new Conexao();
-            // Cria a conexao com o banco de dados.
+            // Cria a conexao com o banco de dados
             $conn = $conexao->getConection();
-            // Cria query de seleção.
+            // Cria query de seleção do usuario
             $query = "SELECT * FROM usuario WHERE login = :login and senha = :senha";
             // Prepara a query para execução.
             $stmt = $conn->prepare($query);
-            // Cria um array para receber o resultado da seleção.
+            // Cria um array para receber o resultado da seleção
             $result = array();
-            // Executa a query.
-            if ($stmt->execute()(array(':login'=> $this->login, ':senha'=> $this->senha))) 
+            // Executa a query
+            if ($stmt->execute(array(':login'=> $this->login, ':senha'=> $this->senha))) 
             {
-                if($stmt->rowCount() > 0)
+                //verifica se houve algum registro encotrado
+                if($stmt->rowCount() > 0) {
                     $result = true;
-            }
-            return $result;
-        }
+                }
+                else{
+                    $result = false;
+                }
+            } 
+        return $result;
     }
+}
 ?>
