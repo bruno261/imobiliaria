@@ -40,12 +40,12 @@
                           <li class="has-sub">
                               <a href="javascript:void(0)">Novos</a>
                               <ul class="sub-menu">
-                                  <li><a href="meetings.html">Upcoming Meetings</a></li>
-                                  <li><a href="meeting-details.html">Meeting Details</a></li>
+                                  <li><a href="meetings.html">Apartamentos</a></li>
+                                  <li><a href="meeting-details.html">Casas</a></li>
                               </ul>
                           </li>
                           <li class="scroll-to-section"><a href="#courses">Sobre</a></li> 
-                          <li class="scroll-to-section"><a href="#contact">Fale Conosco Us</a></li> 
+                          <li class="scroll-to-section"><a href="#contact">Fale Conosco</a></li> 
                       </ul>        
                       <a class='menu-trigger'>
                           <span>Menu</span>

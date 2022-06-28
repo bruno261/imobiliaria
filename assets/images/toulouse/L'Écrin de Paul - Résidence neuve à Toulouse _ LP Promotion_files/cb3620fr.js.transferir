@@ -1,0 +1,1456 @@
+var nomForm = "cb3620";
+var dragObj = null;
+var m_idl = null;
+var idl_idb = false;
+var contexte = {};
+var creneau_crc = {} ;
+var cpt=0;
+var _ck = "";
+var arg = false ;
+var uri_init = document.location.protocol ;
+var uri = 'https://' ;
+var IDL_CallBack = {};
+var idl_form_vars_ho = "";
+var isIE = (navigator.appName == 'Microsoft Internet Explorer') ? true : false ;
+var mr=false;
+var id_com = '';
+var statut_com = '';
+var tmp_msg = '';
+var tmp_img = '';
+var boite = false;
+var callLeg = 'C';
+var _mIntOut = 1; // Max Intention de sortie
+var _cIntOut = 0; // Compteur Intention de sortie
+var idl_wcb_differer = false;
+var isCss=false;
+function Callme(a,b,c) {
+	arg = arguments ;
+	idl_idb = b;
+	if(typeof(contexte[idl_idb]) == 'undefined'){
+		console.log('Callme->undefined',new Date().getTime());
+		var d = new Date();
+		loadCSS('');
+		getDataCrossDomain(uri+"wcb.freezcall.com/call_back/inc/wcb_fr.php?q=init&uri="+uri_init+"&account="+a+"|"+b+"|"+_ck+"&tsp="+d.getTime());
+		timerload(550, "CallmeNext()");
+	}else{
+		CallmeNext();
+	}
+}
+function CallmeNext() {
+	var largeur=300;
+	var hauteur=350;
+	if(contexte[idl_idb].wcb_largeur){largeur = contexte[idl_idb].wcb_largeur;}
+	if(contexte[idl_idb].wcb_hauteur){hauteur = contexte[idl_idb].wcb_hauteur;}
+	var options="location=no,menubar=no,scrollbars=no,statusbar=no,resizable=1";
+	var top=(screen.height-hauteur)/2;
+	var left=(screen.width-largeur)/2;
+	var urlOpen = uri+"wcb.freezcall.com/3620statsV2/dispo_callback.php?";
+	var tmpurlFrom = window.location.href.toString();
+	tmpurlFrom = tmpurlFrom.replace(/&/g,"{");
+	var a = arg[0];
+	var b = arg[1];
+	var c = arg[2];
+	//retraitement du tag 'information libre' du 12/04/2011
+	var reg=new RegExp("( )", "g");
+	c = c.replace(reg,"|");
+
+	if(typeof(arg[3]) == 'undefined' || arg[3] =='') {
+		//var largeur=300;
+		//var hauteur=350;
+	}else {
+		largeur=arg[3];
+		hauteur = arg[4];
+	}
+	var tmp = document.getElementById("IDL_FORM_VARS");
+	if(tmp) {
+		console.log('IDL_FORM_VARS');
+		idl_form_vars_ho = window.document.getElementById("IDL_FORM_VARS");
+		idl_form_vars_ho = idl_form_vars_ho.value ;
+		console.log(idl_form_vars_ho);
+	}
+	largeur = parseInt(largeur);
+	hauteur = parseInt(hauteur);
+	if(typeof(arg[5]) == 'undefined') {
+		if(contexte[idl_idb].tracking_before){eval(contexte[idl_idb].tracking_before);}
+		if(contexte[idl_idb].is_mobile == 1){
+			window.open(urlOpen+"id_client="+a+"&id_bouton="+b+"&id_position="+c+"&protocole="+contexte[idl_idb].protocole+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho+"&is_mobile="+contexte[idl_idb].is_mobile,"","fullscreen=yes, scrollbars=auto");
+		}else if(contexte[idl_idb].widget == 'POP'){
+			window.open(urlOpen+"id_client="+a+"&id_bouton="+b+"&id_position="+c+"&protocole="+contexte[idl_idb].protocole+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho+"&width="+largeur+"&height="+hauteur,"","top="+top+",left="+left+",width="+largeur+",height="+hauteur+","+options);
+		}else if(contexte[idl_idb].widget == 'WIDGL'){
+			createFrameAutoLoadLight() ;
+		}else if(contexte[idl_idb].widget == 'WIDG'){
+			createFrameAutoLoadMobileNext();
+		}else{
+			loadCSS(a+'|'+b);
+			createInitDiv(largeur, hauteur);
+			addIframeCallBack(urlOpen+"id_client="+a+"&id_bouton="+b+"&id_position="+c+"&protocole="+contexte[idl_idb].protocole+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho, largeur, hauteur);
+			//setTimeout("changeSignature()",1250);
+			setTimeout("fading_idelio('idelioFrame');",750);
+			draggable('idelio_header');
+		}
+	} else {
+		// Transformation des paramètres en variable
+		var opt=arg[5];
+		var opt=opt.split(":");
+		var nb_opt = opt.length;
+		for (i=0; i<nb_opt; i++) {
+			var tmp = opt[i].split("=");
+			opt[i]=tmp[0]+"='"+tmp[1]+"'";
+			eval(opt[i]);
+		}
+		switch(mode) {
+		   case "std":
+   				tmp_mr = (mr && mr != '') ? '&moderetour=rt' : '' ;
+				if(a === '2eec96ef50d362cd87318cc361dcd133'){
+					window.open(urlOpen+"id_client="+a+"&id_bouton="+b+"&id_position="+c+tmp_mr+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho+"&width="+largeur+"&height="+hauteur,"","top="+top+",left="+left+",width="+largeur+",height="+hauteur+","+options);
+				}else if(contexte[idl_idb].is_mobile == 1){
+					window.open(urlOpen+"id_client="+a+"&id_bouton="+b+"&id_position="+c+"&protocole="+contexte[idl_idb].protocole+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho+"&is_mobile="+contexte[idl_idb].is_mobile,"","fullscreen=yes, scrollbars=auto");
+				}else{
+					loadCSS(a+'|'+b);
+					createInitDiv(largeur, hauteur);
+					addIframeCallBack(urlOpen+"id_client="+a+"&id_bouton="+b+"&id_position="+c+tmp_mr+"&protocole="+contexte[idl_idb].protocole+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho, largeur, hauteur);
+					setTimeout("fading_idelio('idelioFrame');",750);
+				}
+
+		   break;
+		   case "ajx":
+			   if(veriftel(arg)) {
+					var form =  window.document.getElementById(nomForm);
+					var d = form.telephone.value;
+					var st = (typeof st == "undefined" ) ? "" : "&st="+st ;
+					tmp = "id_client="+a+"&id_bouton="+b+"&id_position="+c+"&id_numero="+d+"&moderetour="+mr+st+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho;
+					// Affichage du chargement
+					document.getElementById("sf").value="";
+					document.getElementById("sf").style.background = "url('"+uri+"wcb.freezcall.com/call_back/img/loading.transparent.gif') no-repeat";
+					req_ajax(uri+"wcb.freezcall.com/", "3620statsV2/adsense_callback.php", tmp, "sf");
+					if(contexte[idl_idb].modeNotification=='popin'){
+						idelioMessage(global_reponse,0, 10,contexte[idl_idb].couleurAnnonceRappel);
+					}else{
+						alert(global_reponse);
+					}
+					document.getElementById("sf").style.background = "";
+					//document.getElementById("sf").telephone.value=d;
+					if(contexte[idl_idb].tracking_ask){eval(contexte[idl_idb].tracking_ask);}
+				}
+		   break;
+		    case "json":
+			  if(veriftel(arg)) {
+					if(contexte[idl_idb].rt){createDivNotificationRT();}
+					var form =  window.document.getElementById(nomForm);
+					var d = form.telephone.value;
+					var st = (typeof st == "undefined" ) ? "" : "&st="+st ;
+					var tmp = "id_client="+a+"&id_bouton="+b+"&id_position="+c+"&id_numero="+d+"&moderetour="+mr+st+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho;
+					var url = uri+"wcb.freezcall.com/3620statsV2/adsense_callback.php?"+tmp;
+					verifierBlocageExtension(url);
+					form.telephone.value = "";
+					form.telephone.style.background = "url('"+uri+"wcb.freezcall.com/call_back/img/loading.transparent.gif') no-repeat";
+					if(contexte[idl_idb].tracking_ask){eval(contexte[idl_idb].tracking_ask);}
+				}
+		   break;
+			case "vid":
+				nomForm="cbv3620";
+				if(veriftel()) {
+					var st = (typeof st == "undefined" ) ? "" : "&st="+st ;
+					var d = document.cbv3620.telephone.value;
+					var tmp = "id_client="+a+"&id_bouton="+b+"&id_position="+c+"&id_numero="+d+"&moderetour="+mr+st+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho+"&canal=video";
+					var url = uri+"wcb.freezcall.com/3620statsV2/adsense_callback.php?"+tmp;
+					//alert(url);
+					verifierBlocageExtension(url);
+					document.getElementById("sfv").value="";
+					document.getElementById("sfv").style.background = "url('"+uri+"wcb.freezcall.com/call_back/img/loading.transparent.gif') no-repeat";
+					setTimeout('pushScript('+url+')',500);
+					//document.getElementById("sfv").style.background = "";
+					//document.getElementById("sfv").value=d;
+				}
+		   break;
+		   default:
+				if(contexte[idl_idb].is_mobile == 1){
+					window.open(urlOpen+"id_client="+a+"&id_bouton="+b+"&id_position="+c+"&protocole="+contexte[idl_idb].protocole+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho+"&is_mobile="+contexte[idl_idb].is_mobile,"","fullscreen=yes, scrollbars=auto");
+				}else{
+					loadCSS(a+'|'+b);
+					createInitDiv(largeur, hauteur);
+					addIframeCallBack(urlOpen+"id_client="+a+"&id_bouton="+b+"&id_position="+c+"&protocole="+contexte[idl_idb].protocole+"&urlFrom="+tmpurlFrom+"&idl_form_vars_ho="+idl_form_vars_ho, largeur, hauteur);
+					setTimeout("fading_idelio('idelioFrame');",750);
+				}
+		   break;
+		}
+	}
+}
+
+function jsoncallback(data) {
+	var form =  window.document.getElementById(nomForm);
+	if(document.getElementById(nomForm) !== null){
+		form.telephone.style.background = "";
+		if(typeof (form.cp) != "undefined"){form.cp.value="";}
+	}
+	if(document.getElementById("sf") !== null){
+		document.getElementById("sf").style.background = "";
+	}
+	if(document.getElementById("sfv") !== null){
+		document.getElementById("sfv").style.background = "";
+	}
+	var code = "";
+	if(data.code != "" ){
+		code = data.code+" - ";
+	}
+	if(nomForm.substring(nomForm.length-2, nomForm.length) == '-w'){
+		form.id = nomForm = nomForm.substring(0,nomForm.length-2);
+	}
+	if(data.idCom != '' && contexte[idl_idb].rt){
+		data['callLeg'] = 'C';
+		checkStatut(data.idCom, data.callLeg, 'light');
+	}
+	if(contexte[idl_idb].modeNotification=='popin'){
+		if(!isCss){loadCSS("");}
+		idelioMessage(code+data.msg,0, 10,contexte[idl_idb].couleurAnnonceRappel);
+		if(data.code == "0" ){window.close();}
+	}else{
+		alert(code+data.msg);
+	}
+	//alert("ok");
+}
+
+function _cb() {
+	var Taille = window.document.forms[nomForm].telephone.value;
+	if (isNaN(Taille)) {
+		alert("Le Numéro doit être entièrement numérique.");
+	return false;
+	}
+	var cp="";
+	if (typeof (window.document.forms[nomForm].cp) != "undefined") {
+		var cp0 = window.document.forms[nomForm].cp.value;
+		if (isNaN(cp0)) {
+			alert("Le Code Postal doit être entièrement numérique.");
+			return false;
+		}
+		var cpTaille ;
+		cpTaille = cp0.length;
+		if (cpTaille < 5) {
+			alert("Merci d’indiquer un code postal à 5 chiffres");
+			return false ;
+		}
+		cp="&cp="+cp0 ;
+	}
+
+	var e="";
+	if (typeof (window.document.forms[nomForm].info_form) != "undefined") {
+		e = window.document.forms[nomForm].info_form.value ;
+	}
+	Taille = Taille.length;
+	if (Taille < 10) {
+		alert("Merci d’indiquer un numéro de téléphone à 10 chiffres");
+		return false ;
+	} else {
+		var btRappel = window.document.getElementById('btRappel');
+		if (btRappel != null && btRappel != 'undefined' && btRappel != undefined && btRappel != ''){
+			btRappel.onclick = "";
+			if(btRappel.tagName == 'IMG'){btRappel.src = uri+"wcb.freezcall.com/call_back/formulaire_clients/3620_bas_load_t.gif";}
+			if(btRappel.tagName == 'BUTTON'){btRappel.innerHTML = "Appel en cours...";}
+		}
+		setTimeout('send_cb("'+cp+'");',400);
+	}
+}
+
+function send_cb(cp){
+	var urlOpen = uri+"wcb.freezcall.com/3620statsV2/adsense_callback.php";
+	var a = window.document.forms[nomForm].id_client.value;
+	var b = window.document.forms[nomForm].id_bouton.value;
+	var c = window.document.forms[nomForm].id_position.value;
+	var d = window.document.forms[nomForm].telephone.value + cp;
+	var e = window.document.forms[nomForm].info_form.value;
+	if(idl_wcb_differer){
+		e = e+"&idl_wcb_jour="+document.getElementById('idl_wcb_jour').value;
+	}
+	var f = window.document.forms[nomForm].urlFrom.value;
+	var g = window.document.forms[nomForm].moderetour.value;
+	console.log("g->"+g);
+	if(g == "rt"){
+		if(contexte[idl_idb].rt){createDivNotificationRT();}
+		var url = urlOpen+"?id_client="+a+"&id_bouton="+b+"&id_position="+c+"&id_numero="+d+"&urlFrom="+f+"&idl_form_vars_ho="+idl_form_vars_ho+"&info_form="+e+"&moderetour="+g;
+		exec_ajax(url);
+		if(global_reponse != ''){
+			//alert(global_reponse);
+			eval(global_reponse);
+			global_reponse = '';
+		}
+	}else{
+		var tmp = document.getElementById("IDL_FORM_VARS");
+		if(tmp) {idl_form_vars_ho = window.document.getElementById("IDL_FORM_VARS").value;}
+		window.location.href = urlOpen+"?id_client="+a+"&id_bouton="+b+"&id_position="+c+"&id_numero="+d+"&urlFrom="+f+"&idl_form_vars_ho="+idl_form_vars_ho+"&info_form="+e+"&moderetour="+g ;
+//		window.location.href = urlOpen+"?id_client="+a+"&id_bouton="+b+"&id_position="+c+"&id_numero="+d+"&urlFrom="+f+"&info_form="+e ;
+	}
+}
+function pushScript(url){
+	var s = document.createElement("script");
+	s.type = "text/javascript";
+	s.src=url;
+	document.body.appendChild(s);
+}
+
+function verifierBlocageExtension(url){
+	var s = document.createElement("script");
+	s.type = "text/javascript";
+	var d = new Date();
+	s.src=uri+"wcb.freezcall.com/call_back/inc/advert.js?tsp="+d.getTime();
+	document.body.appendChild(s);
+	setTimeout('suiteVerifierBlocageExtension("'+url+'")',250);
+}
+function suiteVerifierBlocageExtension(url){
+	if (document.getElementById("idl_wcbjsok") == undefined){
+		console.log('Rappel automatique bloqué par une extension.');
+		alert('Une extension empêche le rappel gratuit de s\'effectuer.\nMerci de le désactiver temporairement.');
+		var form =  window.document.getElementById(nomForm);
+		form.telephone.style.background = "";
+		return false ;
+	}else{
+		pushScript(url);
+	}
+}
+function setRemerciement(obj){
+	console.log('setRemerciement');
+	document.body.style.color = obj.CouleurTitre;
+	document.body.style.background = obj.CouleurTitreTexte;
+	document.body.style.fontFamily = 'Helvetica Neue,Helvetica,Arial,sans-serif';
+
+	//body onload="tracking_client();" style="color:'.$ligne['CouleurTitre'].';background:'.$ligne['CouleurTitreTexte'].';font-family:Helvetica Neue,Helvetica,Arial,sans-serif;"></body>
+	document.body.innerHTML='<div style="font-weight: bold;margin-top:100px;text-align:justify;">'+obj.msg+'</div>';
+}
+function setIframeContent(idelioSrc) {
+	idelioFrame = document.createElement("iframe");
+	idelioFrame.id = "idelioFrame" ;
+	idelioFrame.setAttribute("src", idelioSrc);
+	idelioFrame.style.border = "0px";
+	idelioFrame.style.width = largeur+"px";
+	idelioFrame.style.height = hauteur+"px";
+	idelioFrame.style.top = "35px";
+	idelioFrame.style.bottom = "0px";
+	//idelioFrame.style.position = "relative";
+	idelioFrame.style.display = "none";
+	document.getElementById("idelio_content").appendChild(idelioFrame);
+
+}
+function veriftel(arg) {
+	var tmp = nomForm;
+	if(typeof(arg[6]) != 'undefined'){
+		var obj = arg[6];
+		if(obj && obj.tagName == 'FORM'){
+			console.log('detect-arg6',obj);
+		}else{
+			obj = obj.parentNode;
+			for (var i = 0; i < 10; i++) {
+				if(obj.parentNode){
+					console.log('typeof->parentNode',obj.parentNode);
+					obj = obj.parentNode;
+					if(obj && obj.tagName == 'FORM'){break;}
+				}
+			}
+		}
+		nomForm = obj.id = obj.id+'-w';
+	}
+	var form =  window.document.getElementById(nomForm);
+	var Taille = form.telephone.value;
+	if (isNaN(Taille)) {
+		alert("Le Numéro doit être entièrement numérique.");
+		form.id = nomForm = tmp;
+		form.telephone.focus();
+		return false;
+	}
+	var cp="";
+	if (typeof (form.cp) != "undefined") {
+		var cp0 = form.cp.value ;
+		if (isNaN(cp0)) {
+			alert("Le Code Postal doit être entièrement numérique.");
+			form.id = nomForm = tmp;
+			form.cp.focus();
+			return false;
+		}
+		var cpTaille ;
+		cpTaille = cp0.length;
+		if (cpTaille < 5) {
+			alert("Merci d’indiquer un code postal à 5 chiffres");
+			form.id = nomForm = tmp;
+			form.cp.focus();
+			return false;
+		}
+		cp="&cp="+cp0 ;
+	}
+
+	var e="";
+	if (typeof (form.info_form) != "undefined") {
+		e = form.info_form.value ;
+	}
+	Taille = Taille.length;
+	if (Taille < 10) {
+		alert("Merci d’indiquer un numéro de téléphone à 10 chiffres");
+		form.id = nomForm = tmp;
+		form.telephone.focus();
+		return false;
+	} else {
+		return true;
+	}
+}
+
+function sf(){
+	if(isIE){
+		//console.log('nomForm->'+nomForm);
+		//document.getElementById('telephone').focus;
+	}else{
+		document.forms[nomForm].telephone.focus();
+	}
+}
+
+function verif_liste(liste) {
+	var a = verif_liste.arguments[0];
+	var b = document.getElementById(a).value;
+	if (b=='') {
+		alert('Merci de bien vouloir sélectionner l\'école qui vous intéresse dans la liste déroulante.');
+		return false;
+	} else {
+		return true;
+	}
+}
+function getInternetExplorerVersion(){
+  var rv = -1; // Return value assumes failure.
+  if (navigator.appName == 'Microsoft Internet Explorer'){
+    var ua = navigator.userAgent;
+    var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+    if (re.exec(ua) != null)
+      rv = parseFloat( RegExp.$1 );
+  }
+  return rv;
+}
+function req_ajax(racine_du_site, url_requete, donnees, obj) {
+		var req = null;
+			//Si l'objet existe déjà on abandonne la requête et on le supprime
+		if(req && req.readyState != 0) {
+			req.abort();
+			delete req;
+		}
+		if(window.XMLHttpRequest){ req = new XMLHttpRequest();}
+		else if(window.ActiveXObject){ req = new ActiveXObject("Microsoft.XMLHTTP");}
+		else{alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest..."); return; }
+		req.open("GET", racine_du_site+url_requete+'?'+donnees, true);
+		req.onreadystatechange = function() {
+			//document.getElementById(ob).innerHTML=visuel_chargement;
+			if(req.readyState == 4) {
+				if(req.status == 200 || req.status == 0) {
+					//document.getElementById(objet).innerHTML = req.responseText;
+					global_reponse = req.responseText;
+					eval(global_reponse);
+				} else {
+					//document.getElementById(objet).innerHTML ="CODE ERREUR : " + req.status + " " + req.statusText;
+					var msg ="Erreur accès serveur :\n Statut = " + req.status + "\n Message = " + req.statusText;
+					alert(msg);
+				}
+			}
+		};
+		req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		// envoi des données en POST:
+		req.send(null);
+}
+
+function collecte_form() {
+	// convert all characters to lowercase to simplify testing
+	var agt=navigator.userAgent.toLowerCase();
+	var is_ie = ((agt.indexOf("msie") != -1) && (agt.indexOf("opera") == -1));
+	var test = is_ie ? document.getElementById("Info_Form").value : document.getTargetElement("Info_Form").value ;
+	//document.getElementById("Info_Form").value = "Eric" ;
+	alert(test);
+	//return false;
+}
+
+function check() {
+	var taille = document.forms[nomForm].nom.value.length;
+	if (taille === 0) {
+		alert("Vous devez saisir votre nom");
+		return false;
+	}
+	if (isNaN(document.forms[nomForm].telephone.value)){
+		alert("Numéro de téléphone erroné");
+		return false;
+	}else if (document.forms[nomForm].telephone.value.length < 10){
+		alert("Numéro de téléphone erroné");
+		return false;
+	}
+	TmpMom = document.getElementById('nom').value ;
+	TmpSte = document.getElementById('SOCIETE').value ;
+	TmpSte = TmpSte.toUpperCase();
+	TmpEmail = document.getElementById('EMAIL').value ;
+	document.getElementById('info_form').value = TmpMom+"|"+TmpSte+"|"+TmpEmail ;
+	_cb();
+}
+function function_opacity_idelioFrame(opacity_value, fading_idelioFrame) {
+    fading_idelioFrame.style.opacity = opacity_value / 100;
+    fading_idelioFrame.style.filter = 'alpha(opacity=' + opacity_value + ')';
+}
+function function_idelioFrame(opacity_value, fading_idelioFrame) {
+    function_opacity_idelioFrame(opacity_value, fading_idelioFrame);
+    if (opacity_value == 1) {
+        fading_idelioFrame.style.display = 'block';
+    }
+    if (opacity_value == 100) {
+        done = true;
+    }
+}
+// fade in button
+function fading_idelio(idelioObj){
+	var done = true,
+	fading_idelioFrame = document.getElementById(idelioObj);
+
+	if (done && fading_idelioFrame.style.opacity !== '1') {
+		done = false;
+		for (var i = 1; i <= 100; i++) {
+			setTimeout((function (x) {
+				return function () {
+					function_idelioFrame(x, fading_idelioFrame)
+				};
+			})(i), i * 10);
+		}
+	}
+}
+
+function addIframeCallBack(idelioSrc,largeur,hauteur){
+	el = document.getElementById("idelio_header");
+	el.style.width = largeur+5+"px";
+	el.style.height = hauteur+60+"px";
+	el.style.position = "fixed";
+	el.style.top = (isCrcOpen()) ? "20%" : "1%";
+	el.style.right = "5%";
+	el.style.bottom = "150px";
+	//el.style.backgroundColor = contexte[idl_idb].CouleurTitreTexte;
+
+	idelioFrame = document.createElement("iframe");
+	idelioFrame.id = "idelioFrame" ;
+	idelioFrame.setAttribute("src", idelioSrc);
+	idelioFrame.style.border = "0px";
+	idelioFrame.style.width = largeur+"px";
+	idelioFrame.style.height = hauteur+"px";
+	idelioFrame.style.top = "35px";
+	idelioFrame.style.bottom = "0px";
+	//idelioFrame.style.position = "relative";
+	idelioFrame.style.display = "none";
+	document.getElementById("idelio_content").appendChild(idelioFrame);
+}
+function deleteDiv(){
+	var obj = document.getElementById('idelio_header');
+	obj.innerHTML = "" ;
+	obj.style.display = "none";
+	return true;
+}
+function loadCSS(id){
+	var d = new Date();
+	var runUrlCSS =uri+"wcb.freezcall.com/call_back/inc/wcb_fr.css"+"?tsp="+d.getTime();
+//	var runUrlCSS =uri+"wcb.freezcall.com/call_back/inc/wcb_fr.php?account="+id;
+	var s = document.createElement('link');s.setAttribute("rel", "stylesheet");s.setAttribute('async', 'true');s.setAttribute('type', 'text/css');s.setAttribute("href", runUrlCSS);
+	document.getElementsByTagName("head")[0].appendChild(s);
+	isCss=true;
+}
+function createInitDiv(largeur, hauteur){
+	if(m_idl != null){
+		m_idl = document.getElementById('idelio_header');
+		m_idl.style.display = "block";
+		m_idl.style.width = largeur+"px";
+		m_idl.style.height = hauteur+"px";
+		m_idl.style.color = contexte[idl_idb].CouleurTitreTexte;
+		m_idl.style.backgroundColor = contexte[idl_idb].CouleurFond;
+		if(contexte[idl_idb].font_family){
+			m_idl.style.fontFamily = contexte[idl_idb].font_family;
+		}
+	}else{
+		m_idl = document.createElement('div');
+		m_idl.id = 'idelio_header';
+		m_idl.className = 'idelio-modal';
+		m_idl.style.width = "100px";
+		m_idl.style.height = "100px";
+		m_idl.style.color = contexte[idl_idb].CouleurTitreTexte;
+		m_idl.style.backgroundColor = contexte[idl_idb].CouleurFond;
+		if(contexte[idl_idb].font_family){
+			m_idl.style.fontFamily = contexte[idl_idb].font_family;
+		}
+		document.getElementsByTagName('body')[0].appendChild(m_idl);
+	}
+	var f = document.createElement('div');
+	f.id = 'idelio-title';
+	f.className = 'idelio-title';
+	f.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+	f.innerHTML = 'Rappel Automatique';
+	m_idl.appendChild(f);
+	f = document.createElement('div');
+	f.id = 'idelio_content';
+	f.style.backgroundColor = contexte[idl_idb].CouleurFond;
+	f.className = 'idelio-content';
+	m_idl.appendChild(f);
+	f = document.createElement('ul');
+	f.className = 'idelio-footer';
+	f.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+//	f.innerHTML = '<a id="idelio_signature" href="http://www.idelio.net" target="_blank" title="Edit&eacute; par idelio">'+contexte[idl_idb].libelle_revendeur+'</a>';
+	f.innerHTML = '<a id="idelio_signature" href="#" title="Edit&eacute; par '+contexte[idl_idb].libelle_revendeur+'">'+contexte[idl_idb].libelle_revendeur+'</a>';
+	m_idl.appendChild(f);
+	f = document.createElement('div');
+	f.className = 'idelio-exit';
+	//f.innerHTML = 'X';
+	f.onclick = function(){deleteDiv();}
+	m_idl.appendChild(f);
+}
+function changeSignature(){
+	var obj = document.getElementById('idelio_signature');
+	var tmp = window.getComputedStyle(obj).getPropertyValue('font-family') ;
+	obj.style.fontFamily = "Helvetica Neue,Helvetica,Arial,sans-serif";
+	obj.innerHTML = tmp;
+}
+function detectDevice() {
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+    return true;
+  }
+ else {
+    return false;
+  }
+}
+/*
+Gestion du déplacement de la fenetre
+*/
+var selected = null, // Object of the element to be moved
+    x_pos = 0, y_pos = 0, // Stores x & y coordinates of the mouse pointer
+    x_elem = 0, y_elem = 0; // Stores top, left values (edge) of the element
+
+function _drag_init(elem) {
+    selected = elem;
+    x_elem = x_pos - selected.offsetLeft;
+    y_elem = y_pos - selected.offsetTop;
+}
+function _move_elem(e) {
+    x_pos = document.all ? window.event.clientX : e.pageX;
+    y_pos = document.all ? window.event.clientY : e.pageY;
+    if (selected !== null) {
+        selected.style.left = (x_pos - x_elem) + 'px';
+        selected.style.top = (y_pos - y_elem) + 'px';
+    }
+}
+function _destroy() {
+    selected = null;
+}
+
+function draggable(id){
+	document.onmousemove = _move_elem;
+	document.onmouseup = _destroy;
+	document.getElementById(id).onmousedown = function () {
+		_drag_init(this);
+		return false;
+	};
+}
+
+/**
+*
+*  URL encode / decode
+*
+**/
+var Url = {
+
+	// public method for url encoding
+	encode : function (string) {
+		return escape(this._utf8_encode(string));
+	},
+
+	// public method for url decoding
+	decode : function (string) {
+		return this._utf8_decode(unescape(string));
+	},
+
+	// private method for UTF-8 encoding
+	_utf8_encode : function (string) {
+		string = string.replace(/\r\n/g,"\n");
+		var utftext = "";
+
+		for (var n = 0; n < string.length; n++) {
+
+			var c = string.charCodeAt(n);
+
+			if (c < 128) {
+				utftext += String.fromCharCode(c);
+			}
+			else if((c > 127) && (c < 2048)) {
+				utftext += String.fromCharCode((c >> 6) | 192);
+				utftext += String.fromCharCode((c & 63) | 128);
+			}
+			else {
+				utftext += String.fromCharCode((c >> 12) | 224);
+				utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+				utftext += String.fromCharCode((c & 63) | 128);
+			}
+
+		}
+
+		return utftext;
+	},
+
+	// private method for UTF-8 decoding
+	_utf8_decode : function (utftext) {
+		var string = "";
+		var i = 0;
+		var c = c1 = c2 = 0;
+
+		while ( i < utftext.length ) {
+
+			c = utftext.charCodeAt(i);
+
+			if (c < 128) {
+				string += String.fromCharCode(c);
+				i++;
+			}
+			else if((c > 191) && (c < 224)) {
+				c2 = utftext.charCodeAt(i+1);
+				string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+				i += 2;
+			}
+			else {
+				c2 = utftext.charCodeAt(i+1);
+				c3 = utftext.charCodeAt(i+2);
+				string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+				i += 3;
+			}
+
+		}
+
+		return string;
+	}
+
+};
+
+function exec_ajax(url){
+	var req = null;
+	if(req && req.readyState != 0) {
+		req.abort();
+		delete req;
+	}
+	if(window.XMLHttpRequest){ req = new XMLHttpRequest();}
+	else if(window.ActiveXObject){ req = new ActiveXObject("Microsoft.XMLHTTP");}
+	else{alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest..."); return; }
+	req.open("GET", url, false);
+	req.send(null);
+	if(req.status == 200 || req.status == 0) {
+		global_reponse = req.responseText;
+	} else {
+		var reponse ="Erreur acces serveur :\n Statut = " + req.status + "\n Message = " + req.statusText;
+		alert(reponse);
+	}
+}
+
+function affiche_statut(data){
+	id_com = ((id_com == '' || id_com == data.idCom) && data.idCom != '' ) ? data.idCom : 'err' ;
+	var intervalle = (data.intervalle != '') ? data.intervalle : 5000 ;
+
+	if(!boite){
+		var conteneur = document.getElementById('conteneur');
+		while(conteneur.childNodes[0]){
+			conteneur.removeChild(conteneur.childNodes[0]);
+		}
+		var bloc_img = document.createElement('div');
+		bloc_img.id = 'bloc_img';
+		var img_statut = document.createElement('img');
+		img_statut.id = 'img_statut';
+		img_statut.src = uri+'wcb.freezcall.com/call_back/img/etape1.gif';
+		bloc_img.appendChild(img_statut);
+
+		var bloc_info = document.createElement('div');
+		bloc_info.id = 'bloc_info';
+
+		conteneur.appendChild(bloc_img);
+		conteneur.appendChild(bloc_info);
+		boite = true;
+	}
+
+	if(id_com != 'err' && data.statutCom != ''){
+
+		var txt = document.getElementById('bloc_info');
+		switch(data.callLeg){
+			case 'C' :
+				switch(data.statutCom){
+					case 'progress' :
+						var msg = 'On vous appelle.';
+						var url_img = uri+'wcb.freezcall.com/call_back/img/etape1_anim.gif';
+					break;
+					case 'ok' :
+						var msg = 'On vous met en relation';
+						callLeg = 'S';
+						var url_img = uri+'wcb.freezcall.com/call_back/img/etape2_anim.gif';
+					break;
+					case 'ko' :
+						var msg = 'Vous n\'avez pas d&eacute;croch&eacute;';
+						var url_img = uri+'wcb.freezcall.com/call_back/img/etape4_anim.gif';
+						clearTimeout(varChrono);
+					break;
+					default :
+						var msg = tmp_msg;
+						var url_img = tmp_img;
+					break;
+				}
+			break;
+			case 'S' :
+				switch(data.statutCom){
+					case 'progress' :
+						var msg = 'On vous met en relation';
+						var url_img = uri+'wcb.freezcall.com/call_back/img/etape2_anim.gif';
+					break;
+					case 'ok' :
+						var msg = 'Communication : ';
+						var url_img = uri+'wcb.freezcall.com/call_back/img/etape3_anim.gif';
+					break;
+					case 'ko' :
+						var msg = 'Fin de l\'appel';
+						var url_img = uri+'wcb.freezcall.com/call_back/img/etape4_anim.gif';
+						clearTimeout(varChrono);
+						setTimeout('self.close();',2000);
+					break;
+					default :
+						var msg = tmp_msg;
+						var url_img = tmp_img;
+					break;
+				}
+			break;
+		}
+		tmp_msg = msg;
+		tmp_img = url_img;
+
+		if(statut_com != data.statutCom){
+			var is = document.getElementById('img_statut');
+			is.src = url_img;
+		}
+
+		if(data.statutCom == 'ok' && statut_com == 'ok' && data.callLeg == 'S'){
+		}else{
+			txt.innerHTML = msg;
+			if(data.statutCom == 'ok' && data.callLeg == 'S'){
+				lanceChrono(0);
+			}
+		}
+		statut_com = data.statutCom ;
+
+		if(statut_com != 'ko'){
+			setTimeout('checkStatut("'+id_com+'","'+callLeg+'", "img")',intervalle);
+		}
+	}else{
+		alert('Une erreur d\'affichage est survenue. Veuillez contacter votre administrateur.');
+	}
+
+}
+function afficheMessageRT(data){
+	var intervalle = (data.intervalle != '') ? data.intervalle : 5000 ;
+	var tmp = document.getElementById('idl-notification-rt');
+	tmp.innerHTML = contexte[idl_idb][data.statutCom] ;
+	if(data.statutCom == 'progress'){
+		setTimeout('checkStatut("'+data.idCom+'","'+data.callLeg+'","light")',intervalle);
+	}else if(data.statutCom == 'ok'){
+		if(contexte[idl_idb].tracking_connect){eval(contexte[idl_idb].tracking_connect);}
+		setTimeout('masquerMessageRT()',7000);
+	}else{
+		setTimeout('masquerMessageRT()',7000);
+	}
+}
+function masquerMessageRT(){
+	var tmp = document.getElementById('idl-notification-rt').style.display = "none";
+}
+function checkStatut(id_appel,intervenant,mode){
+	var url = uri+'wcb.freezcall.com/call_back/checkCBStatutCom.php?id_com='+id_appel+'&call_leg='+intervenant+'&mode='+mode;
+	exec_ajax(url);
+	if(global_reponse != ''){
+		eval(global_reponse);
+		global_reponse = '';
+	}
+
+}
+
+var varChrono = null;
+var chrono = null;
+var sec=0;
+var min=0;
+var heur=0;
+
+function lanceChrono(tps){
+	if(tps!=null && tps!=''){
+		var t = parseHeure(parseInt(tps));
+		heur = (tps<3600000 && t[0]==1 )? t[0]-1 : t[0] ;
+		min = t[1];
+		sec = t[2];
+	}
+	if(chrono==null || chrono==''){
+		genereChrono();
+	}
+	document.getElementById('bloc_info').appendChild(chrono);
+
+	if(varChrono==null || varChrono==''){
+		tourneChrono();
+	}
+}
+
+function genereChrono(){
+	var c = document.createElement("div");
+	c.id = 'chron';
+	c.className = 'chron_elt';
+
+	var s = document.createElement("div");
+	s.id = 'chronS';
+	s.className = 'chron_elt';
+	var separ1 = document.createElement("div");
+	separ1.className = 'chron_elt';
+	separ1.innerHTML = ':';
+	var m = document.createElement("div");
+	m.id = 'chronM';
+	m.className = 'chron_elt';
+	var separ2 = document.createElement("div");
+	separ2.className = 'chron_elt';
+	separ2.innerHTML = ':';
+	var h = document.createElement("div");
+	h.id = 'chronH';
+	h.className = 'chron_elt';
+
+	c.appendChild(h);
+	c.appendChild(separ1);
+	c.appendChild(m);
+	c.appendChild(separ2);
+	c.appendChild(s);
+	chrono = c;
+
+}
+function createObjetIDL(obj){
+	IDL_CallBack['key']=obj[0];IDL_CallBack['id']=obj[1];IDL_CallBack['infolibre']=obj[2];IDL_CallBack['autoload']=false;IDL_CallBack['position']="BC";
+	IDL_CallBack['params']=(typeof(obj[5]) == 'undefined') ? "" : obj[5] ;
+}
+function getRappelAutomatiqueIDs(){
+	var res = false ;
+	var allElements = document.getElementsByTagName('*');
+	if(issetCookie('_IDL_WCB')){_ck = getCookie('_IDL_WCB');}
+	for ( var i = 0; i<allElements.length; i++ ) {
+		if ( typeof allElements[i].onclick === 'function' ) {
+			if (getInternetExplorerVersion() <= 11 ){
+				//console.log(getInternetExplorerVersion());
+				var obj = allElements[i] ;
+				var obj = obj.outerHTML;
+				var pos = obj.search(/Callme/i);
+				if(pos>0){
+					obj = obj.substring(pos,pos+50);
+					obj = obj.replace(/(Callme)|\(|\'|\)/g, "");
+					obj = obj.split(',');
+					createObjetIDL(obj);
+					idl_idb = String(obj[1]);
+					res = obj[0]+"|"+obj[1]+"|"+_ck ;
+					break;
+				}
+			}else{
+				var obj = allElements[i].getAttribute('onclick');
+				if(obj){
+					if(obj.substring(0,6) === 'Callme'){
+						obj = obj.replace(/(Callme)|\(|\'|\)/g, "");
+						obj = obj.split(',');
+						createObjetIDL(obj);
+						res = obj[0]+"|"+obj[1]+"|"+_ck ;
+						idl_idb = String(obj[1]);
+						break;
+					}
+				}
+			}
+		}
+	}
+	if(!res){
+		var obj = document.getElementsByTagName('form');
+		if(typeof obj['cb3620'] =='object'){
+			res = null;
+			obj = obj['cb3620'] ;
+			obj = obj.getAttribute('action');
+			if(obj){
+				obj = obj.replace(/(Javascript:|javascript:)|\(|\'|\)/g, "");
+				obj = obj.replace(/(Callme)|\(|\'|\)/g, "");
+				obj = obj.split(',');
+				if(obj.length>3){
+					createObjetIDL(obj);
+					res = obj[0]+"|"+obj[1]+"|"+_ck ;
+					idl_idb = String(obj[1]);
+				}
+			}
+		}
+	}
+	if(res===null){
+		console.log('Callme non detecte au chargement');
+		return false;
+	}else if(res){
+		idl_wcb_load(res);
+	}else if(typeof(IDL_WCB_Key) != 'undefined'){
+		var obj = IDL_WCB_Key.account+'|'+IDL_WCB_Key.tag;
+		obj.split('|');
+		createObjetIDL(obj);
+		idl_wcb_load(IDL_WCB_Key.account+'|'+_ck);
+	}else{
+		timerload(450, "getRappelAutomatiqueIDs()");
+	}
+}
+function idl_wcb_load(res){
+	var d = new Date();
+	getDataCrossDomain(uri+"wcb.freezcall.com/call_back/inc/wcb_fr.php?q=init&uri="+uri_init+"&account="+res+"&tsp="+d.getTime());
+	getDataCrossDomain(uri+"wcb.freezcall.com/call_back/inc/wcb_fr.php?q=calendar&account="+res+"&tsp="+d.getTime());
+}
+function timerload(t, fct){
+	if(typeof(contexte[idl_idb]) == 'undefined'){
+		setTimeout(fct,t);
+	}else{
+		CallmeNext();
+	}
+}
+function tourneChrono(){
+	sec++;
+	if (sec>59){sec=0;min++}
+	if (min>59){min=0;heur++}
+	document.getElementById('chronS').innerHTML=addZero(sec);
+	document.getElementById('chronM').innerHTML=addZero(min);
+	document.getElementById('chronH').innerHTML=addZero(heur);
+	varChrono=setTimeout('tourneChrono()',1000);
+}
+
+function addZero(v) {
+	return (v<10)? '0' + v : v;
+}
+function getDataCrossDomain(url) {
+	var s = document.createElement("script");
+	s.type = "text/javascript";
+	s.src=url;
+	document.body.appendChild(s);
+}
+function DataCrossDomain(data){
+	contexte[idl_idb] = data ;
+	setCookie ('_IDL_WCB', data._ck, 31536000);
+	if(data.autoload){
+		IDL_CallBack['autoload'] = data.autoload;
+		IDL_CallBack['position']=data.position;
+		loadCSS("");
+		if(contexte[idl_idb].is_mobile==1){
+			//createDivAutoLoadMobile();
+		}
+		if(contexte[idl_idb].position != 'NO'){
+			var tmp = 'idl-footer-btn';
+			createDivCallBackNew();
+			setTimeout("fading_idelio('"+tmp+"');",250);
+		}
+		if(contexte[idl_idb].type == 3){createFrameAutoLoad();}
+	}
+	if(contexte[idl_idb].popupAvantSortie == 1){
+		document.addEventListener('mousemove', positionSouris, false);
+	}
+	if(data.listener){
+		setListenerOnIdOrClass(data.listener);
+	}
+	setTimeout("afficheMasqueInteractiveWCB()", 1000);
+}
+function setDiv(object){
+	var a = document.createElement(object['elt']);
+	for( var key in object ) {
+		if(key=='innerHTML'){
+			a.innerHTML = object[key];
+		}else{
+			if(key != 'elt'){
+				a.setAttribute(key,object[key]);
+			}
+		}
+	}
+	return a ;
+}
+function getStylePositionLoad(){
+	var def = (typeof(IDL_CallBack.position) == 'undefined' || IDL_CallBack.position == "" ) ? "BC" : IDL_CallBack.position ;
+	switch(def){
+		case 'BC' : return "padding-left: 40%;"; break ;
+		case 'BG' : return "left: 10px;"; break ;
+		case 'BD' : return "padding-left: 75%;"; break ;
+	}
+}
+
+function deleteObjCallback(id){
+	var a = document.getElementById(id);
+	if(document.getElementById(id)){a.parentNode.removeChild(a);}
+}
+function createFrameAutoLoad(){
+		(contexte[idl_idb].widget == 'WIDGL') ? createFrameAutoLoadLight() : createFrameAutoLoadMobileNext() ;
+}
+function createFrameAutoLoadMobileNext(){
+	var params = "id_client="+IDL_CallBack.key+"&id_bouton="+IDL_CallBack.id+"&id_position="+IDL_CallBack.position+"&protocole="+uri_init+"&urlFrom="+window.location.href.toString();
+	var modal = setDiv({'elt':'div','id':'idl-modal-one','class':'idl-modal','onclick':'deleteObjCallback(\'idl-modal-one\');'});
+	var modal_dialog = setDiv({'elt':'div','id':'idl-modal-dialog','class':'idl-modal-dialog'});
+	modal_dialog.style.width = ""+contexte[idl_idb].wcb_largeur+"px" ;
+	modal_dialog.style.height = ""+contexte[idl_idb].wcb_hauteur+"px" ;
+	var modal_header = setDiv({'elt':'div','class':'idl-modal-header',innerHTML:'<h2 style="color:'+contexte[idl_idb].CouleurTitreTexte+';">Contactez-nous</h2><a href="#" onclick="deleteObjCallback(\'idl-modal-one\');" class="btn-mob-close">×</a>'});
+	modal_header.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+	modal_header.style.color= contexte[idl_idb].CouleurTitreTexte;
+	var modal_body = setDiv({'elt':'div','class':'idl-modal-body'});
+	var modal_footer = setDiv({'elt':'div','class':'idl-modal-footer',innerHTML:'<a id="byidelio" style="color:'+contexte[idl_idb].CouleurTitreTexte+';" href="'+contexte[idl_idb].web_site+'" target="_blank" title="Edité par '+contexte[idl_idb].libelle_revendeur+'">'+contexte[idl_idb].libelle_revendeur+'</a>'});
+
+	modal_footer.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+	modal_footer.style.color= contexte[idl_idb].CouleurTitreTexte;
+
+	var idlFrame = setDiv({'elt':'iframe','id':'idelioFrame',src:uri+"wcb.freezcall.com/3620statsV2/dispo_callback.php?"+params});
+	idlFrame.setAttribute('style',"border: 0px; background-color:"+contexte[idl_idb].CouleurFond+"; width:"+parseInt(contexte[idl_idb].wcb_largeur)+"px; height:"+(parseInt(contexte[idl_idb].wcb_hauteur)-15)+"px; top: 35px; bottom: 0px; display: block; opacity: 1;");
+
+	modal_body.appendChild(idlFrame);
+	modal_dialog.appendChild(modal_header);
+	modal_dialog.appendChild(modal_body);
+	modal_dialog.appendChild(modal_footer);
+	modal.appendChild(modal_dialog);
+	document.body.appendChild(modal);
+}
+function createFrameAutoLoadLight(){
+	var modal = setDiv({'elt':'div','id':'idl-modal-one','class':'idl-modal','onclick':'deleteObjCallback(\'idl-modal-one\');'});
+	var modal_dialog = setDiv({'elt':'div','class':'idl-modal-dialog'});
+	modal_dialog.style.height = '170px';
+	var modal_header = setDiv({'elt':'div','class':'idl-modal-header',innerHTML:'<h2>Contactez-nous</h2><a href="#" onclick="deleteObjCallback(\'idl-modal-one\');" class="btn-mob-close">×</a>'});
+	modal_header.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+	modal_header.style.color= contexte[idl_idb].CouleurTitreTexte;
+	var modal_body = setDiv({'elt':'div','class':'idl-modal-body-mob'});
+	var modal_footer = setDiv({'elt':'div','class':'idl-modal-footer idl-modal-footer-mob',innerHTML:'<span id="byidelio" style="color:'+contexte[idl_idb].CouleurTitreTexte+';" href="'+contexte[idl_idb].web_site+'" target="_blank" title="Edité par '+contexte[idl_idb].libelle_revendeur+'">'+contexte[idl_idb].libelle_revendeur+'</span>'});
+	modal_footer.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+	modal_footer.style.color= contexte[idl_idb].CouleurTitreTexte;
+
+	var msg = 'Pour être rappelé immédiatement, saisissez votre numéro de téléphone :' ;
+	msg = (contexte[idl_idb].ho) ? msg : contexte[idl_idb].msg ;
+	var rappel = setDiv({'elt':'div','id':'idl-rappel-mob'});
+	rappel.style.backgroundColor= contexte[idl_idb].CouleurFond;
+	rappel.style.color= contexte[idl_idb].CouleurTexte;
+	var footer = setDiv({'elt':'div','id':'idl-footer-mob'});
+
+	var ct = setDiv({'elt':'div','id':'idl-content-mob','class':'idl-content-mob'});
+	var tmp = setDiv({'elt':'div','id':'idl-msg-mob',innerHTML:msg});
+	ct.appendChild(tmp);
+	if(contexte[idl_idb].ho){
+		var type = (contexte[idl_idb].is_mobile) ? 'number' : 'text' ;
+		tmp = document.createElement('form');
+		tmp.name = "cb3620";
+		tmp.id = "cb3620";
+		tmp.setAttribute("action","Javascript:Callme('"+IDL_CallBack.key+"','"+IDL_CallBack.id+"','"+IDL_CallBack.infolibre+" - "+IDL_CallBack.position+"','','','mode=json:st=n:mr=JSON')");
+		var idl_input = setDiv({'elt':'div','id':'idl-input-mob',innerHTML:'<input type="'+type+'" id="sf" value="" name="telephone" rel="Votre numéro" />'});
+		tmp.appendChild(idl_input);
+		var idl_btn = setDiv({'elt':'div','id':'idl-btn-mob',innerHTML:'<a href="#" style="background-color:'+contexte[idl_idb].CouleurTitre+';color:'+contexte[idl_idb].CouleurTitreTexte+';" id="wcb_callback" onclick=\'Callme("'+IDL_CallBack.key+'","'+IDL_CallBack.id+'","'+IDL_CallBack.infolibre+" - "+IDL_CallBack.position+'","","","mode=json:st=n:mr=JSON")\' class="btn-call-mob">Appelez-moi</a>'});
+		idl_btn.style.color= contexte[idl_idb].CouleurTitreTexte;
+		tmp.appendChild(idl_btn);
+		ct.appendChild(tmp);
+	}
+	footer.appendChild(ct);
+	rappel.appendChild(footer);
+
+
+	modal_body.appendChild(rappel);
+	modal_dialog.appendChild(modal_header);
+	modal_dialog.appendChild(modal_body);
+	modal_dialog.appendChild(modal_footer);
+	modal.appendChild(modal_dialog);
+	document.body.appendChild(modal);
+	setTimeout("document.getElementById('sf').focus();",550);
+}
+
+function createDivCallBackNew(){
+	var idl_bar = setDiv({'id':'idl-footer-btn','elt':'div','class':'idl-footer-btn'});
+	var idl_callback = setDiv({'id':'wcb_callback','elt':'a','class':'idl-btn-callback','href':'#'});
+	var idl_callback_span = setDiv({'elt':'span','innerHTML':'<li class="call"><a href="#non"></a></li><span>Etre appel&eacute;</span>'}); // pour IE et version < IE9
+	idl_callback.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+	idl_callback.style.color= contexte[idl_idb].CouleurTitreTexte;
+	idl_callback.onclick= function(){createFrameAutoLoad();};
+	idl_callback.appendChild(idl_callback_span);
+	if(contexte[idl_idb].nsc){
+		var idl_calltrack = setDiv({'elt':'a','class':'idl-btn-calltrack'});
+		var idl_calltrack_span = setDiv({'elt':'span','innerHTML':'<li class="call"></li><span>'+contexte[idl_idb].nsc+'</span>'}); // pour IE et version < IE9
+		idl_calltrack.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+		idl_calltrack.style.color= contexte[idl_idb].CouleurTitreTexte;
+		idl_calltrack.appendChild(idl_calltrack_span);
+	}
+	idl_bar.appendChild(idl_callback);
+	if(contexte[idl_idb].nsc){idl_bar.appendChild(idl_calltrack)};
+	document.body.appendChild(idl_bar);
+}
+function createDivNotificationRT(){
+	getMessageSuiviRT();
+	var idl_bar = setDiv({'id':'idl-notification-msg','elt':'div','class':'idl-notification-msg'});
+	var idl_callnotif = setDiv({'id':'idl-notification-rt','elt':'span','class':'idl-notification-rt','innerHTML':contexte[idl_idb].progress});
+	idl_callnotif.style.backgroundColor= contexte[idl_idb].CouleurTitre;
+	idl_callnotif.style.color= contexte[idl_idb].CouleurTitreTexte;
+	idl_bar.appendChild(idl_callnotif);
+	if(contexte[idl_idb].nsc){idl_bar.appendChild(idl_callnotif)};
+	document.body.appendChild(idl_bar);
+}
+function getMessageSuiviRT(){
+	contexte[idl_idb]['error'] = 'Numéro inconnu, ou erreur de connexion au numéro.';
+	contexte[idl_idb]['failed'] = 'Faux numéro.';
+	contexte[idl_idb]['ko'] = 'La communication est terminée.';
+	if(mr && contexte[idl_idb].inverser){
+		contexte[idl_idb]['progress'] = 'Recherche d\'un Conseiller disponible. Merci de patienter ...';
+		contexte[idl_idb]['ok'] = 'Un conseiller a été trouvé, et vous appelle...';
+	}else{
+		contexte[idl_idb]['progress'] = 'Appel de votre numéro. Merci de patienter ...';
+		contexte[idl_idb]['ok'] = 'Merci d\'avoir décroché, un conseiller va bientôt vous répondre...';
+	}
+}
+function listeCreneau(data){
+	creneau_crc = data;
+	if(creneau_crc.length>0){loadCreneauxDispo();}
+}
+function affiche_dateheure(obj){
+	var id = obj.id;
+	if(obj.date!=""){
+		var jr = obj.id.split('_');
+		jr = jr[1];
+		for(var i = 0; i <= cpt; i++){
+			if(document.getElementById('tranche_'+i) !== null) {
+				document.getElementById('tranche_'+i).style.display = "none";
+			}
+		}
+		if(document.getElementById('tranche_'+jr)){
+			document.getElementById('tranche_'+jr).style.display = "block";
+		}
+	}
+}
+function loadCreneauxDispo(){
+	cpt = creneau_crc.length ;
+	if(document.getElementById('dl-list-creneau') !== null){
+		var init = document.getElementById('idl-list-creneau');
+		for(var i=0; i<cpt; i++ ) {
+			var a = setMenuChoixCallBack(creneau_crc[i]);
+			init.appendChild(a);
+		}
+		document.body.appendChild(init);
+	}
+}
+function setIDTranche(obj){
+	idl_wcb_differer = true;
+	document.getElementById('idl_wcb_jour').value = obj.parentElement.title + "_" + obj.id;
+	document.getElementById('idl-list-creneau').innerHTML="";
+	_cb();
+}
+function delListeCreneau(){
+	idl_wcb_differer = false;
+	document.getElementById('idl_wcb_jour').value = "";
+	document.getElementById('idl-list-creneau').innerHTML="";
+	document.getElementById('plus-tard').style.display = "none";
+	document.getElementById('maintenant').style.display = null;
+}
+function setMenuChoixCallBack(obj){
+	var name = formatDate(obj['date']);
+	var i = obj['id'] ;
+	var tpl_date = setDiv({'elt':'div','id':'date_'+i,'class':'idl_date','title':obj['date'],'onmouseover':'affiche_dateheure(this);'});
+	var tpl_a = setDiv({'elt':'a','href':'#','innerHTML':name});
+	var b = setCreneauInObjet(obj['tranche']);
+	var tpl_tranche = setDiv({'elt':'div','id':'tranche_'+i,'class':'idl_tranche','style':'display:none','innerHTML':b,'title':obj['date']});
+	tpl_date.appendChild(tpl_a);
+	tpl_date.appendChild(tpl_tranche);
+	return tpl_date ;
+}
+function setCreneauInObjet(obj){
+	var a = "";
+	for( var key in obj ) {
+		a = a+'<div id="'+obj[key]['code']+'" onclick="setIDTranche(this);"><div class="marqueur attente'+obj[key]['attente']+'"></div><a href="#">'+obj[key]['libelle']+'</a></div>';
+	}
+	return a;
+}
+function formatDate(a) {
+	if(a!=""){
+	  var a = a.split('-');
+	  return a[2]+'/'+a[1];
+	}else{
+	  return "";
+	}
+}
+function afficherDivMobile(){
+	location.href="#modal-one";
+	setTimeout("document.getElementById('sf').focus();",450);
+	setTimeout("fading_idelio('idl-modal-one');",250);
+}
+function voirContenuObjet(obj){
+	for(i in obj){
+		console.log('voirContenuObjet->'+i + " " + obj[i]);
+	}
+}
+function IDL_strtotime(str){
+	str = (str == "") ? "00:00" : str ;
+	var tsp = Date.parse('Thu, 01 Jan 2009 '+str+':00') ;
+	return tsp/1000;
+}
+function isCrcOpen() {
+	maDate = new Date();
+	nJour = maDate.getDay();
+	nHeure = maDate.getHours();
+	nMinutes = maDate.getMinutes();
+
+	var horaire = contexte[idl_idb].hor;
+	var tranche = horaire.split("{");
+	switch (nJour) {
+		case 1 : horaire = tranche[0].split("|");break;
+		case 2 : horaire = tranche[1].split("|");break;
+		case 3 : horaire = tranche[2].split("|");break;
+		case 4 : horaire = tranche[3].split("|");break;
+		case 5 : horaire = tranche[4].split("|");break;
+		case 6 : horaire = tranche[5].split("|");break;
+		case 0 : horaire = tranche[6].split("|");break;
+	}
+
+	var tmpheuredemande = IDL_strtotime(nHeure+':'+nMinutes);
+	if ((tmpheuredemande >= IDL_strtotime(horaire[1]) && tmpheuredemande <= IDL_strtotime(horaire[2])) ||
+		(tmpheuredemande >= IDL_strtotime(horaire[4]) && tmpheuredemande <= IDL_strtotime(horaire[5])) ||
+		(tmpheuredemande >= IDL_strtotime(horaire[7]) && tmpheuredemande <= IDL_strtotime(horaire[8])) ) {
+	// CRC Ouvert
+		return true ;
+	} else {
+		// CRC fermer.
+		return false ;
+	}
+}
+function getCookieVal(offset) {
+	var endstr=document.cookie.indexOf (";", offset);
+	if (endstr==-1)
+      		endstr=document.cookie.length;
+	return unescape(document.cookie.substring(offset, endstr));
+}
+function setCookie (name, value, duree) {
+	var argv=setCookie.arguments;
+	var argc=setCookie.arguments.length;
+	var expires = new Date();
+	var path=(argc > 3) ? argv[3] : null;
+	var domain=(argc > 4) ? argv[4] : null;
+	var secure=(argc > 5) ? argv[5] : false;
+	expires.setTime(expires.getTime()+duree);
+	document.cookie=name+"="+escape(value)+
+		((expires==null) ? "" : ("; expires="+expires.toGMTString()))+
+		((path==null) ? "; path=/" : ("; path="+path))+
+		((domain==null) ? "" : ("; domain="+domain))+
+		((secure==true) ? "; secure" : "");
+}
+function getCookie(name) {
+	if(document.cookie.indexOf(name+'=')!=-1){
+		var arg=name+"=";
+		var alen=arg.length;
+		var clen=document.cookie.length;
+		var i=0;
+		while (i<clen) {
+			var j=i+alen;
+			if (document.cookie.substring(i, j)==arg)
+				return getCookieVal (j);
+			i=document.cookie.indexOf(" ",i)+1;
+			if (i==0) break;
+		}
+		return null;
+	}else{
+		return false ;
+	}
+}
+function issetCookie(name){
+	return (document.cookie.indexOf(name+'=')!=-1) ? true : false ;
+}
+
+function afficheMasqueInteractiveWCB(){
+	if(contexte[idl_idb].type != 1 || contexte[idl_idb].dyn){
+		if(isCrcOpen() && contexte[idl_idb].active == 1){
+			if(document.getElementById("wcb_callback_div") !== null){
+				document.getElementById("wcb_callback_div").style.display = "block";
+			}
+			if(document.getElementById("wcb_callback_hno_div") !== null){
+				document.getElementById("wcb_callback_hno_div").style.display = "none";
+			}
+		}else{
+			if(document.getElementById("wcb_callback_div") !== null){
+				document.getElementById("wcb_callback_div").style.display = "none";
+				console.log('display',document.getElementById("wcb_callback_div").style.display);
+				if(document.getElementById("wcb_callback_hno_div") !== null){
+					document.getElementById("wcb_callback_hno_div").style.display = "block";
+					document.getElementById("wcb_callback_hno_div").innerHTML = contexte[idl_idb].msg ;
+				}
+			}else if(document.getElementById("3620_img") !== null){
+				var z1 = document.getElementById("3620_img");
+				z1.width ='0';
+				z1.height ='0';
+				z1.width ='0';
+			}
+		}
+	}
+	//var wcb_timer=setInterval("afficheMasqueInteractiveWCB()", 5000);
+}
+function creerMessage(){
+	var idl_msg = setDiv({'elt':'div','id':'idl_msg','class':'idl_blocktext'});
+	var idl_notif_widget = setDiv({'elt':'div','class':'idl_notif_widget','style':'float:right'});
+	var button = setDiv({'elt':'button','class':'idl_notif_widget-close','onclick':'closeMessage()'});
+	var div_msg = setDiv({'elt':'div','class':'idl_notif_widget-body'});
+	var msg = setDiv({'elt':'p','id':'idl_msg_content'});
+
+	idl_notif_widget.appendChild(button);
+	div_msg.appendChild(msg);
+	idl_msg.appendChild(idl_notif_widget);
+	idl_msg.appendChild(div_msg);
+	var body = document.body;
+	body.insertBefore(idl_msg, body.firstChild);
+	//document.body.appendChild(idl_msg);
+}
+function idelioMessage(msg,from, to,color){
+	if(!document.getElementById("idl_msg_content")){creerMessage();}
+	idl_tmp_obj = document.getElementById("idl_msg");
+	idl_tmp_obj.style.backgroundColor=color;
+	document.getElementById("idl_msg_content").innerHTML = msg;
+	if(from <= to){
+	   idl_tmp_obj.style.marginTop = from + "%";
+	   setTimeout(function(){
+		   idelioMessage(msg,from + 1, to,color);
+	   }, 15)
+	}
+}
+function closeMessage(){
+	idl_tmp_obj = document.getElementById("idl_msg");
+	idl_tmp_obj.parentNode.removeChild(idl_tmp_obj);
+}
+function positionSouris(event) {
+	var posX;
+	var posY;
+	posX = event.clientX;
+	posY = event.clientY;
+	if(posY<2){actionSurDepart();}
+	//document.getElementById('divPosition').innerHTML = 'Coordonnées de la souris :<br/>X = ' + posX + '<br />Y = ' + posY;
+}
+function actionSurDepart(){
+	if(isCrcOpen() && _cIntOut<_mIntOut){
+		document.getElementById('wcb_callback').click();
+		_cIntOut++;
+	}
+}
+function callMeOnListerner(){
+	//console.log('IDL_WCB_Key',typeof(IDL_WCB_Key));
+	if(typeof(IDL_WCB_Key) != 'undefined'){
+		var tmp = IDL_WCB_Key.account.split('|');
+		Callme(tmp[0],tmp[1],IDL_WCB_Key.tag);
+	}else if(IDL_CallBack['key']){
+		Callme(IDL_CallBack.key,IDL_CallBack.id,IDL_CallBack.infolibre);
+	}else{
+		console.log('aucun identifiant trouvé');
+	}
+}
+function setListenerOnIdOrClass(wcb_listener){
+	if(wcb_listener.length>0){
+		wcb_listener = wcb_listener.split('|');
+		for (var i = 0; i < wcb_listener.length; i++) {
+			var okObj=false;
+			var tmpId = wcb_listener[i];
+			var obj = document.getElementById(tmpId);
+			okObj = (obj === null) ? false : true;
+			if(okObj === false){
+				obj = document.getElementsByClassName(tmpId);
+				if(obj.length>0){
+					for (var j = 0; j < obj.length; j++) {
+						var tmp_class = obj[j].className;
+						if(tmpId == obj[j].className){
+							okObj=true;
+							obj = obj[j];
+						}
+					}
+				}
+			}
+			if(okObj){
+				obj.removeAttribute("href");
+				obj.addEventListener("click", callMeOnListerner);
+			}
+		}
+	}
+}
+setTimeout('getRappelAutomatiqueIDs()',750);

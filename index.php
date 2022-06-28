@@ -42,42 +42,8 @@
             require_once 'principal.php';
         }
     }
-
-    require_once 'foot.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-    <title>Education Meeting HTML5 Template</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-edu-meeting.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/lightbox.css">
-<!--
-
-TemplateMo 569 Edu Meeting
-
-https://templatemo.com/tm-569-edu-meeting
-
--->
-  </head>
-
-<body>
   <!-- ***** Main Banner Area Start ***** -->
   <section class="section main-banner" id="top" data-section="section1">
       <video autoplay muted loop id="bg-video">
@@ -89,11 +55,11 @@ https://templatemo.com/tm-569-edu-meeting
             <div class="row">
               <div class="col-lg-12">
                 <div class="caption">
-              <h6>Hello Students</h6>
-              <h2>Welcome to Education</h2>
-              <p>This is an edu meeting HTML CSS template provided by <a rel="nofollow" href="https://templatemo.com/page/1" target="_blank">TemplateMo website</a>. This is a Bootstrap v5.1.3 layout. The video background is taken from Pexels website, a group of young people by <a rel="nofollow" href="https://www.pexels.com/@pressmaster" target="_blank">Pressmaster</a>.</p>
+              <h6>Olá Amigo</h6>
+              <h2>Seja bem-vindo à nossa Imobiliária</h2>
+              <p>Aqui você encontra os melhores apartamentos e casas, pronto para morar. Estão disponíveis para compra ou alugel. Aproveite</p>
               <div class="main-button-red">
-                  <div class="scroll-to-section"><a href="#contact">Join Us Now!</a></div>
+                  <div class="scroll-to-section"><a href="#contact">Fale conosco</a></div>
               </div>
           </div>
               </div>
@@ -114,7 +80,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <img src="assets/images/service-icon-01.png" alt="">
               </div>
               <div class="down-content">
-                <h4>Best Education</h4>
+                <h4>Melhor conforto</h4>
                 <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
               </div>
             </div>
@@ -124,7 +90,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <img src="assets/images/service-icon-02.png" alt="">
               </div>
               <div class="down-content">
-                <h4>Best Teachers</h4>
+                <h4>Melhor localização</h4>
                 <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
               </div>
             </div>
@@ -134,7 +100,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <img src="assets/images/service-icon-03.png" alt="">
               </div>
               <div class="down-content">
-                <h4>Best Students</h4>
+                <h4>Espaço de diversão</h4>
                 <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
               </div>
             </div>
@@ -144,7 +110,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <img src="assets/images/service-icon-02.png" alt="">
               </div>
               <div class="down-content">
-                <h4>Online Meeting</h4>
+                <h4>Escritórios para trabalho</h4>
                 <p>Suspendisse tempor mauris a sem elementum bibendum. Praesent facilisis massa non vestibulum.</p>
               </div>
             </div>
@@ -170,21 +136,21 @@ https://templatemo.com/tm-569-edu-meeting
       <div class="row">
         <div class="col-lg-12">
           <div class="section-heading">
-            <h2>Upcoming Meetings</h2>
+            <h2>Veja o que temos para você</h2>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="categories">
-            <h4>Meeting Catgories</h4>
+            <h4>Categorias</h4>
             <ul>
-              <li><a href="#">Sed tempus enim leo</a></li>
-              <li><a href="#">Aenean molestie quis</a></li>
-              <li><a href="#">Cras et metus vestibulum</a></li>
-              <li><a href="#">Nam et condimentum</a></li>
-              <li><a href="#">Phasellus nec sapien</a></li>
+              <li><a href="#">Apartamentos</a></li> |
+              <li><a href="#">Casas</a></li> |
+              <li><a href="#">Kitnet</a></li> |
+              <li><a href="#">Escritórios</a></li> |
+              <li><a href="#">Armazéns</a></li>
             </ul>
             <div class="main-button-red">
-              <a href="meetings.html">All Upcoming Meetings</a>
+              <a href="meetings.html">Veja todas as categorias</a>
             </div>
           </div>
         </div>
@@ -194,16 +160,16 @@ https://templatemo.com/tm-569-edu-meeting
               <div class="meeting-item">
                 <div class="thumb">
                   <div class="price">
-                    <span>$22.00</span>
+                    <span>R$ 220.000,00</span>
                   </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-01.jpg" alt="New Lecturer Meeting"></a>
+                  <a href="meeting-details.php"><img src="assets/images/2/unnamed.jpg" alt="New Lecturer Meeting"></a>
                 </div>
                 <div class="down-content">
                   <div class="date">
-                    <h6>Nov <span>10</span></h6>
+                    <a href="meeting-details.php"><h6>Vender</h6></a>
                   </div>
-                  <a href="meeting-details.html"><h4>New Lecturers Meeting</h4></a>
-                  <p>Morbi in libero blandit lectus<br>cursus ullamcorper.</p>
+                  <a href="meeting-details.php"><h4>Pousada</h4></a>
+                  <p>Centro-Hortolândia, SP</p>
                 </div>
               </div>
             </div>
@@ -264,100 +230,12 @@ https://templatemo.com/tm-569-edu-meeting
     </div>
   </section>
 
-  <section class="apply-now" id="apply">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 align-self-center">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="item">
-                <h3>APPLY FOR BACHELOR DEGREE</h3>
-                <p>You are allowed to use this edu meeting CSS template for your school or university or business. You can feel free to modify or edit this layout.</p>
-                <div class="main-button-red">
-                  <div class="scroll-to-section"><a href="#contact">Join Us Now!</a></div>
-              </div>
-              </div>
-            </div>
-            <div class="col-lg-12">
-              <div class="item">
-                <h3>APPLY FOR BACHELOR DEGREE</h3>
-                <p>You are not allowed to redistribute the template ZIP file on any other template website. Please contact us for more information.</p>
-                <div class="main-button-yellow">
-                  <div class="scroll-to-section"><a href="#contact">Join Us Now!</a></div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="accordions is-first-expanded">
-            <article class="accordion">
-                <div class="accordion-head">
-                    <span>About Edu Meeting HTML Template</span>
-                    <span class="icon">
-                        <i class="icon fa fa-chevron-right"></i>
-                    </span>
-                </div>
-                <div class="accordion-body">
-                    <div class="content">
-                        <p>If you want to get the latest collection of HTML CSS templates for your websites, you may visit <a rel="nofollow" href="https://www.toocss.com/" target="_blank">Too CSS website</a>. If you need a working contact form script, please visit <a href="https://templatemo.com/contact" target="_parent">our contact page</a> for more info.</p>
-                    </div>
-                </div>
-            </article>
-            <article class="accordion">
-                <div class="accordion-head">
-                    <span>HTML CSS Bootstrap Layout</span>
-                    <span class="icon">
-                        <i class="icon fa fa-chevron-right"></i>
-                    </span>
-                </div>
-                <div class="accordion-body">
-                    <div class="content">
-                        <p>Etiam posuere metus orci, vel consectetur elit imperdiet eu. Cras ipsum magna, maximus at semper sit amet, eleifend eget neque. Nunc facilisis quam purus, sed vulputate augue interdum vitae. Aliquam a elit massa.<br><br>
-                        Nulla malesuada elit lacus, ac ultricies massa varius sed. Etiam eu metus eget nibh consequat aliquet. Proin fringilla, quam at euismod porttitor, odio odio tempus ligula, ut feugiat ex erat nec mauris. Donec viverra velit eget lectus sollicitudin tincidunt.</p>
-                    </div>
-                </div>
-            </article>
-            <article class="accordion">
-                <div class="accordion-head">
-                    <span>Please tell your friends</span>
-                    <span class="icon">
-                        <i class="icon fa fa-chevron-right"></i>
-                    </span>
-                </div>
-                <div class="accordion-body">
-                    <div class="content">
-                        <p>Ut vehicula mauris est, sed sodales justo rhoncus eu. Morbi porttitor quam velit, at ullamcorper justo suscipit sit amet. Quisque at suscipit mi, non efficitur velit.<br><br>
-                        Cras et tortor semper, placerat eros sit amet, porta est. Mauris porttitor sapien et quam volutpat luctus. Nullam sodales ipsum ac neque ultricies varius.</p>
-                    </div>
-                </div>
-            </article>
-            <article class="accordion last-accordion">
-                <div class="accordion-head">
-                    <span>Share this to your colleagues</span>
-                    <span class="icon">
-                        <i class="icon fa fa-chevron-right"></i>
-                    </span>
-                </div>
-                <div class="accordion-body">
-                    <div class="content">
-                        <p>Maecenas suscipit enim libero, vel lobortis justo condimentum id. Interdum et malesuada fames ac ante ipsum primis in faucibus.<br><br>
-                        Sed eleifend metus sit amet magna tristique, posuere laoreet arcu semper. Nulla pellentesque ut tortor sit amet maximus. In eu libero ullamcorper, semper nisi quis, convallis nisi.</p>
-                    </div>
-                </div>
-            </article>
-        </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="our-courses" id="courses">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="section-heading">
-            <h2>Our Popular Courses</h2>
+            <h2>Nossos melhores</h2>
           </div>
         </div>
         <div class="col-lg-12">
@@ -635,7 +513,7 @@ https://templatemo.com/tm-569-edu-meeting
         <div class="col-lg-6">
           <div class="row">
             <div class="col-lg-12">
-              <h2>A Few Facts About Our University</h2>
+              <h2>Nosso alcance</h2>
             </div>
             <div class="col-lg-6">
               <div class="row">
@@ -689,31 +567,31 @@ https://templatemo.com/tm-569-edu-meeting
               <form id="contact" action="" method="post">
                 <div class="row">
                   <div class="col-lg-12">
-                    <h2>Let's get in touch</h2>
+                    <h2>Fale Conosco</h2>
                   </div>
                   <div class="col-lg-4">
                     <fieldset>
-                      <input name="name" type="text" id="name" placeholder="YOURNAME...*" required="">
+                      <input name="name" type="text" id="name" placeholder="Seu nome...*" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-4">
                     <fieldset>
-                    <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="YOUR EMAIL..." required="">
+                    <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*" placeholder="Seu e-amilL..." required="">
                   </fieldset>
                   </div>
                   <div class="col-lg-4">
                     <fieldset>
-                      <input name="subject" type="text" id="subject" placeholder="SUBJECT...*" required="">
+                      <input name="subject" type="text" id="subject" placeholder="Assunto...*" required="">
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <textarea name="message" type="text" class="form-control" id="message" placeholder="YOUR MESSAGE..." required=""></textarea>
+                      <textarea name="message" type="text" class="form-control" id="message" placeholder="Mensagem..." required=""></textarea>
                     </fieldset>
                   </div>
                   <div class="col-lg-12">
                     <fieldset>
-                      <button type="submit" id="form-submit" class="button">SEND MESSAGE NOW</button>
+                      <button type="submit" id="form-submit" class="button">Enviar</button>
                     </fieldset>
                   </div>
                 </div>
@@ -725,33 +603,25 @@ https://templatemo.com/tm-569-edu-meeting
           <div class="right-info">
             <ul>
               <li>
-                <h6>Phone Number</h6>
+                <h6>Telefone</h6>
                 <span>010-020-0340</span>
               </li>
               <li>
-                <h6>Email Address</h6>
+                <h6>Email</h6>
                 <span>info@meeting.edu</span>
               </li>
               <li>
-                <h6>Street Address</h6>
+                <h6>Endereço</h6>
                 <span>Rio de Janeiro - RJ, 22795-008, Brazil</span>
               </li>
               <li>
-                <h6>Website URL</h6>
-                <span>www.meeting.edu</span>
+                <h6>Website</h6>
+                <span>localhost/imobiliaria2</span>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
-    <div class="footer">
-      <p>Copyright © 2022 Edu Meeting Co., Ltd. All Rights Reserved. 
-          <br>
-          Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
-          <br>
-          Distibuted By: <a href="https://themewagon.com" target="_blank" title="Build Better UI, Faster">ThemeWagon</a>
-        </p>
     </div>
   </section>
 
@@ -813,10 +683,8 @@ https://templatemo.com/tm-569-edu-meeting
           checkSection();
         });
     </script>
-</body>
 
-</body>
-</html>
+<?php require_once 'foot.php' ?>
 
 <!-- <!doctype html>
 <html lang="pt-BR">
@@ -827,12 +695,12 @@ https://templatemo.com/tm-569-edu-meeting
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     </head>
     <body>
-        <!-- <h1>Cadastro de usuários E imóveis.</h1>
+        <h1>Cadastro de usuários E imóveis.</h1>
         <link rel="stylesheet" href="https://bootswatch.com/3/darkly/bootstrap.css">
         <a href="index.php?page=imovel">Imóvel.</a><br>
         <a href="index.php?page=usuario">Usuário.</a><br>
-         -->
-        <!-- <?php
+        
+        <?php
             if(isset($_GET['action'])){
                 if($_GET['action'] == 'editar'){ 
                     //chama uma função php que permite informar a classe e o método que será acionado
@@ -876,7 +744,7 @@ https://templatemo.com/tm-569-edu-meeting
             }
             elseif((isset($_GET["page"])) && $_GET["page"] == "imovel")
                 require_once 'view/cadImovel.php';
-        ?> -->
+        ?>
         
         
     </body>

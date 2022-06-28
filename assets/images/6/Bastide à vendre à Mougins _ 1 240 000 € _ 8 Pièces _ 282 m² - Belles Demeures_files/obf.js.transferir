@@ -1,0 +1,105 @@
+"use strict";
+
+/**
+ * @name Obfuscator
+ * @description Classe gérant l'obfuscation d'URL
+ */
+var Obfuscator = function () {
+  /**
+   * @constructor
+   */
+
+  /**
+   * @name initialize
+   * @description
+   * Initialise la classe
+   *
+   * @return {void}
+   */
+  var initialize = function initialize() {
+    tranformUrlLinks();
+  };
+  /**
+   * @name base64Decode
+   * @description
+   * Décode une URL encodée en base 64
+   *
+   * @param {string} data - URL encodée
+   *
+   * @return {string} URL en clair
+   */
+  var base64Decode = function base64Decode(data) {
+    // *     example 1: base64_decode('S2V2aW4gdmFuIFpvbm5ldmVsZA==');
+    // *     returns 1: 'Kevin van Zonneveld'
+    var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    var o1 = 0;
+    var o2 = 0;
+    var o3 = 0;
+    var h1 = 0;
+    var h2 = 0;
+    var h3 = 0;
+    var h4 = 0;
+    var bits = 0;
+    var i = 0;
+    var ac = 0;
+    var dec = "";
+    var tmp_arr = [];
+    if (!data) {
+      return data;
+    }
+    data += "";
+    do {
+      h1 = b64.indexOf(data.charAt(i++));
+      h2 = b64.indexOf(data.charAt(i++));
+      h3 = b64.indexOf(data.charAt(i++));
+      h4 = b64.indexOf(data.charAt(i++));
+      bits = h1 << 18 | h2 << 12 | h3 << 6 | h4;
+      o1 = bits >> 16 & 0xff;
+      o2 = bits >> 8 & 0xff;
+      o3 = bits & 0xff;
+      if (h3 === 64) {
+        tmp_arr[ac++] = String.fromCharCode(o1);
+      } else if (h4 === 64) {
+        tmp_arr[ac++] = String.fromCharCode(o1, o2);
+      } else {
+        tmp_arr[ac++] = String.fromCharCode(o1, o2, o3);
+      }
+    } while (i < data.length);
+    dec = tmp_arr.join("");
+    return dec;
+  };
+  /**
+   * @name tranformUrlLinks
+   * @description
+   * Remplace tous les éléments obfusqués (<span data-obf=...>) par leur liens en clair (<a href=...>)
+   *
+   * @return {void}
+   */
+  var tranformUrlLinks = function tranformUrlLinks() {
+    var spanList = document.querySelectorAll("span[data-obf]");
+    spanList.forEach(function (element) {
+      if (!element || !element.attributes) return;
+      var attributes = {};
+
+      for (var i = 0; i < element.attributes.length; i++) {
+        if (element.attributes[i].nodeName === "data-obf") {
+          attributes["href"] = base64Decode(element.attributes[i].nodeValue);
+        } else if (element.attributes[i].nodeName === "data-target") {
+          attributes["target"] = element.attributes[i].nodeValue;
+        } else {
+          attributes[element.attributes[i].nodeName] = element.attributes[i].nodeValue;
+        }
+      }
+
+      var link = document.createElement("a");
+      attributes.html = element.innerHTML;
+      oCommonHelper.setAttributes(link, attributes);
+      element.outerHTML = link.outerHTML;
+    });
+  };
+  return {
+    initialize: initialize,
+    tranformUrlLinks: tranformUrlLinks
+  };
+}();
+//# sourceMappingURL=../../../maps/components/obfuscator/obf.js.map

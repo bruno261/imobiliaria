@@ -1,0 +1,5 @@
+
+var conf = {"enable_local_segment_evaluation":false,"segment_definition_uri":null,"enable_apx_matching":false,"enable_goo_matching":true,"enable_tcf_v2_for_cookie_matching":true,"enable_id5":false,"namespace":null}
+if(window.mics && window.mics._setConfig){mics._setConfig(conf)};
+
+        

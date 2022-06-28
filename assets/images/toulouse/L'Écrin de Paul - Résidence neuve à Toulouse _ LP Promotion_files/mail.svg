@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <linearGradient id="uosc0mvlca" x1="39.662%" x2="63.983%" y1="20.825%" y2="77.967%">
+            <stop offset="0%" stop-color="#F8E8AE"/>
+            <stop offset="100%" stop-color="#E6C7A2"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <path d="M0 0H40V40H0z" transform="translate(-349.000000, -1876.000000) translate(0.000000, 1836.000000) translate(349.000000, 40.000000)"/>
+                    <path fill="url(#uosc0mvlca)" fill-rule="nonzero" d="M3.765 11.184c.68-1.37 2.095-2.317 3.735-2.317h25c1.64 0 3.055.947 3.735 2.317.277.56.432 1.188.432 1.85v13.888c0 2.301-1.866 4.167-4.167 4.167h-25c-2.301 0-4.167-1.866-4.167-4.167V13.033c0-.66.155-1.29.432-1.849zm3.858.46l11.712 6.389c.414.226.916.226 1.33 0l11.712-6.389H7.623zm26.266 2.34l-11.894 6.488c-1.243.678-2.747.678-3.99 0L6.11 13.984v12.938c0 .767.622 1.39 1.389 1.39h25c.767 0 1.389-.623 1.389-1.39V13.984z" transform="translate(-349.000000, -1876.000000) translate(0.000000, 1836.000000) translate(349.000000, 40.000000)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
