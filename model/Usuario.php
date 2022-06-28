@@ -49,7 +49,7 @@
         */ 
         public function setSenha($senha)
         {
-            $this->senha = sha1($senha);
+            $this->senha = $senha; //sha1($senha);
         }
 
         /**

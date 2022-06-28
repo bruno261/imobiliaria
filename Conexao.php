@@ -6,7 +6,7 @@
     {
         private $servername = 'localhost:3306';
         private $username = 'root';
-        private $password = 'HORTETEC_115';
+        private $password = '';//'HORTETEC_115';
         private $database = 'imobiliaria';
         private $conection;
 
